@@ -120,11 +120,11 @@
       }
 
       .image-row img {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
+        object-fit: contain;
+        width: 250px;
+        height: 250px;
         border-radius: 50%;
-        border: 1px solid var(--turquoise);
+        border: 0px solid var(--turquoise);
         transition: transform 0.3s ease, box-shadow 0.3s ease,
           border-color 0.3s ease;
       }
@@ -344,9 +344,15 @@
     </section>
 
     <section class="image-row fade-in">
-      <img src="images/drawing1.jpeg" alt="Sport Illustration 1" />
-      <img src="images/drawing2.jpeg" alt="Sport Illustration 2" />
-      <img src="images/drawing3.jpeg" alt="Sport Illustration 3" />
+      <div class="illus-wrapper">
+        <img src="images/illus/voll.png" alt="Sport Illustration 2" />
+      </div>
+      <div class="illus-wrapper">
+        <img src="images/illus/fuss.png" alt="Sport Illustration 3" />
+      </div>
+      <div class="illus-wrapper">
+        <img src="images/illus/tenn.png" alt="Sport Illustration 1" />
+      </div>
     </section>
 
     <section class="contact fade-in">
