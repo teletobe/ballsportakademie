@@ -319,6 +319,31 @@
           justify-content: center; /* centers the logos */
         }
       }
+
+      @media (max-width: 510px) {
+        .tilted-bg::before {
+          content: "";
+          position: absolute;
+          top: 45%;
+          left: 50%;
+          transform: translate(-51%, -51%) rotate(-0.6deg);
+          width: 105%;
+          height: 5.5em;
+          background-color: #4bb9dd; /* dark turquoise */
+          z-index: -2; /* behind text but above second rectangle */
+        }
+        .tilted-bg::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(-0.8deg);
+          width: 106%;
+          height: 6.7em;
+          background-color: #addbe9; /* slightly lighter green/turquoise */
+          z-index: -3; /* behind the first rectangle */
+        }
+      }
     </style>
   </head>
   <body>
