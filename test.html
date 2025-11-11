@@ -128,11 +128,7 @@
           border-color 0.3s ease;
       }
 
-      .image-row img:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-color: var(--turquoise);
-      }
+      
 
       /* --- CONTACT --- */
       .contact {
@@ -588,11 +584,6 @@
         .contact h2 {
           font-size: 2.2rem; /* match or slightly smaller than main h1s */
         }
-
-        .image-row img {
-          width: 280px;
-          height: 280px;
-        }
         .contact img {
           width: 280px;
           height: 280px;
@@ -620,20 +611,159 @@
           font-size: 2.5rem; /* match or slightly smaller than main h1s */
         }
 
-        .image-row img {
-          width: 320px;
-          height: 320px;
-        }
-
         .angebot-cards {
           max-width: 1100px;
         }
       }
+/* === Flip animation for illus-wrapper (final smooth version) === */
+.illus-wrapper {
+  display: inline-block;
+  perspective: 1000px;
+  cursor: pointer;
+  border-radius: 50%;        /* always circular */
+  overflow: hidden;           /* prevents square-to-circle flash */
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
 
+/* Hover lift + shadow (remains circular) */
+.illus-wrapper:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
 
-      
-      
+/* The flipping card inside */
+.flip-card {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
 
+/* Inner rotation container */
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+  position: relative;
+  border-radius: 50%;
+  transform-origin: center;
+}
+
+/* Front and back sides */
+.flip-front,
+.flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* Safari fix */
+}
+
+/* Back side rotated */
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Flipped state */
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+  will-change: transform;
+}
+
+/* === Image alignment container === */
+.img-adjust {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+}
+
+/* The image itself */
+.img-adjust img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%; /* small zoom to allow offset */
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+/* === Per-image fine-tuning === */
+.image-row .illus-wrapper:nth-child(1) .img-adjust img {
+  transform: translate(calc(-50% + 10px), -50%); /* move right */
+}
+
+.image-row .illus-wrapper:nth-child(2) .img-adjust img {
+  transform: translate(calc(-50% - 4px), -50%); /* move left */
+}
+
+.image-row .illus-wrapper:nth-child(3) .img-adjust img {
+  transform: translate(-50%, -50%); /* centered */
+}
+
+/* Responsive sizing */
+@media (max-width: 750px) {
+  .flip-card {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+.angebot-cards,
+#aufnahme-text {
+  opacity: 0;
+  transform: translateY(10px);
+  max-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    max-height 0.6s ease,
+    margin 0.4s ease;
+  pointer-events: none;
+}
+
+.angebot-cards.visible,
+#aufnahme-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 1500px; /* enough to show full content */
+  margin-top: 1.5rem; /* normal spacing when open */
+  margin-bottom: 1.5rem;
+  pointer-events: auto;
+}
+
+/* optional: small stagger effect for cards */
+.angebot-cards.visible div {
+  animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 
 
@@ -667,15 +797,47 @@
 
     <section class="image-row fade-in">
       <div class="illus-wrapper">
-        <img src="images/illus/voll.png" alt="Sport Illustration 2" />
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="img-adjust">
+                <img src="images/illus/voll.png" alt="Volleyball" />
+              </div>            </div>
+            <div class="flip-back">
+              <div class="img-adjust">
+                <img src="images/illus/voll.png" alt="Volleyball" />
+              </div>            </div>
+          </div>
+        </div>
       </div>
+    
       <div class="illus-wrapper">
-        <img src="images/illus/fuss.png" alt="Sport Illustration 3" />
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <img src="images/illus/fuss.png" alt="Sport Illustration Fußball" />
+            </div>
+            <div class="flip-back">
+              <img src="images/illus/fuss.png" alt="Sport Illustration Fußball (back)" />
+            </div>
+          </div>
+        </div>
       </div>
+    
       <div class="illus-wrapper">
-        <img src="images/illus/tenn.png" alt="Sport Illustration 1" />
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <img src="images/illus/tenn.png" alt="Sport Illustration Tennis" />
+            </div>
+            <div class="flip-back">
+              <img src="images/illus/tenn.png" alt="Sport Illustration Tennis (back)" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+    
 
     <section class="intro-row">
       <div class="heading-wrapper">
@@ -700,7 +862,7 @@
         </div>
     
         <!-- 👇 Hidden by default -->
-        <div id="angebot-content-1" class="angebot-cards hidden fade-in-once">
+        <div id="angebot-content-1" class="angebot-cards fade-in-once">
           <div>Verschränkte Ganztagesklasse</div>
           <div>Offener & projektorientierter Unterricht</div>
           <div>Moderne Infrastruktur & Sportanlagen</div>
@@ -720,7 +882,7 @@
         </div>
     
         <!-- 👇 Hidden by default -->
-        <div id="angebot-content-2" class="angebot-cards hidden fade-in-once">
+        <div id="angebot-content-2" class="angebot-cards fade-in-once">
           <div>Die Schüler:innen werden von Montag bis
             Donnerstag bis 16 Uhr, an Freitagen bis 14 Uhr,
             von Pädagog:innen in der Schule betreut. Somit
@@ -745,7 +907,7 @@
         </div>
     
         <!-- 👇 Hidden by default -->
-        <div id="angebot-content-3" class="angebot-cards hidden fade-in-once">
+        <div id="angebot-content-3" class="angebot-cards fade-in-once">
           <div>Intensive Zusammenarbeit zwischen der Schule, den Trainer:innen im Verein/Verband und den Eltern.</div>
           <div>Vermittlung sporttheoretischer Inhalte im Unterricht.</div>
           <div>Sportwissenschaftliche Begleitung.</div>
@@ -777,7 +939,7 @@
         </div>
     
         <!--  Hidden by default -->
-        <div id="angebot-content-4" class="angebot-cards hidden fade-in-once">
+        <div id="angebot-content-4" class="angebot-cards fade-in-once">
           <div>Sportartspezifischer sportmotorischer Test in Fußball, Tennis und Volleyball (durch unabhängige Verbandstrainer:innen)</div>
           <div>Aufnahmegespräch mit Eltern und Schüler:in</div>
           <div>Sportärztliche Untersuchung</div>
@@ -886,16 +1048,32 @@
         const extraText = document.getElementById("aufnahme-text");
 
         toggle.addEventListener("click", () => {
-          content.classList.toggle("hidden");
-          content.classList.toggle("visible");
+          const isVisible = content.classList.contains("visible");
 
-          // Only toggle the extra text for Aufnahme (num == 4)
-          if (num === "4" && extraText) {
-            extraText.classList.toggle("hidden");
-            extraText.classList.toggle("visible");
+          // Hide all other sections first
+          document.querySelectorAll(".angebot-cards, #aufnahme-text").forEach((el) => {
+            el.classList.remove("visible");
+          });
+
+          // Toggle this one
+          if (!isVisible) {
+            content.classList.add("visible");
+            if (num === "4" && extraText) extraText.classList.add("visible");
+          } else {
+            content.classList.remove("visible");
+            if (num === "4" && extraText) extraText.classList.remove("visible");
           }
         });
       });
+
+
+      document.querySelectorAll('.illus-wrapper').forEach(wrapper => {
+        wrapper.addEventListener('click', () => {
+          wrapper.querySelector('.flip-card').classList.toggle('flipped');
+        });
+      });
+
+
 
     </script>
   </body>
