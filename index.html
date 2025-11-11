@@ -29,18 +29,15 @@
         overflow-x: hidden;
       }
 
-      /* --- HEADER --- */
-      /* --- MULTI-LAYER GEOMETRIC HEADER --- */
-      .multi-header {
+            .multi-header {
         position: relative;
         text-align: center;
         color: #ffffff;
-        padding: 3rem 1rem 4rem;
+        padding: 1.5rem 1rem 2.5rem; /*  less top and bottom padding */
         overflow: hidden;
         z-index: 1;
       }
 
-      /* Repeating angled layers using ::after and extra pseudo-elements */
       .multi-header::after {
         content: "";
         position: absolute;
@@ -61,16 +58,18 @@
           #3c9e45 70%
         );
         z-index: -4;
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 95%); /*  slightly shallower angle */
       }
 
-      /* Logo and text styles */
+
       .multi-header img {
-        max-width: 160px;
+        max-width: 200px;
         height: auto;
+        margin-top: 2rem;    /* pushes it lower */
         margin-bottom: 1rem;
         border-radius: 8px;
       }
+
 
       .multi-header h1 {
         font-size: 2rem;
@@ -129,11 +128,7 @@
           border-color 0.3s ease;
       }
 
-      .image-row img:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-color: var(--turquoise);
-      }
+      
 
       /* --- CONTACT --- */
       .contact {
@@ -343,49 +338,636 @@
           background-color: #addbe9; /* slightly lighter green/turquoise */
           z-index: -3; /* behind the first rectangle */
         }
+        .intro-lead {
+          display: block;
+          margin-top: 1rem;
+          width: 75%;
+        }
+        .einlad-lead {
+          display: block;
+          margin-top: 1rem;
+        }
       }
+
+      .hidden {
+        display: none !important;
+      }
+
+      [id^="angebot-toggle"] {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        filter: brightness(1.05);
+
+      }
+
+      [id^="angebot-toggle"]:hover {
+        transform: scale(1.03);
+        filter: brightness(1.12);
+      }
+      .fade-in-once {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease;
+      }
+
+      .fade-in-once.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+
+      .angebot-cards {
+        display: grid;
+        grid-template-columns: 1fr; /* 1 column on mobile */
+        gap: 1rem;
+        max-width: 900px;
+        margin: 2rem auto;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease;
+      }
+
+      .angebot-cards.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .angebot-cards div {
+        background: var(--turquoise);
+        color: #ffffff;
+        padding: 1.2rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-align: center;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+
+        /* vertical centering */
+        display: flex;
+        align-items: center;   /* centers text vertically */
+        justify-content: center; /* centers text horizontally */
+        text-align: center;
+      }
+
+      @media (min-width: 720px) {
+        .angebot-cards {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        /* Only make last card full width for the 5-item section */
+        #angebot-content-1 div:last-child {
+          grid-column: span 2;
+        }
+      }
+
+
+      /* Custom alternating background for Angebot cards */
+      .angebot-cards div:nth-child(1),
+      .angebot-cards div:nth-child(4) {
+        background: var(--bright-green);
+      }
+
+      .angebot-cards div:nth-child(2),
+      .angebot-cards div:nth-child(3),
+      .angebot-cards div:nth-child(5) {
+        background: var(--dark-green);
+      }
+
+      /* Mobile styling for Angebot cards */
+      @media (max-width: 720px) {
+        .angebot-cards {
+          grid-template-columns: 1fr; /* Single column layout */
+          padding: 0 1rem; /* Adds spacing on the left and right */
+        }
+
+        .angebot-cards div {
+          font-size: 1rem; /* Slightly smaller text */
+          margin: 0.5rem 0; /* Adds space between the cards */
+        }
+        
+      }
+
+      /* Override colors for mobile view */
+      @media (max-width: 720px) {
+        .angebot-cards div:nth-child(odd) {
+          background: var(--bright-green);
+        }
+
+        .angebot-cards div:nth-child(even) {
+          background: var(--dark-green);
+        }
+        .contact .tilted-bg{
+          margin-top:1em;
+        }
+
+        /* Add spacing between consecutive intro sections */
+        .intro-row + .intro-row {
+          margin-top: 4em;
+        }
+
+      }
+      /* Add spacing between consecutive intro sections */
+      .intro-row + .intro-row {
+        margin-top: 2em;
+      }
+
+      /* Kick-Off */
+      .bg-kickoff::before {
+        background-color: #4bb9dd;
+        transform: translate(-50%, -50%) rotate(1deg);
+      }
+      .bg-kickoff::after {
+        background-color: #addbe9;
+        transform: translate(-48%, -48%) rotate(1deg);
+      }
+
+      /* Unser Angebot */
+      .bg-angebot::before {
+        background-color: #4bb9dd;
+        transform: translate(-50%, -50%) rotate(-1deg);
+      }
+      .bg-angebot::after {
+        background-color: #addbe9;
+        transform: translate(-48%, -48%) rotate(-1deg);
+      }
+
+      /* Ganztagesklasse */
+      .bg-ganztags::before {
+        background-color: #4bb9dd;
+        transform: translate(-52%, -52%) rotate(1deg);
+      }
+      .bg-ganztags::after {
+        background-color: #addbe9;
+        transform: translate(-52%, -52%) rotate(1.1deg);
+      }
+
+      /* Ganztagesklasse */
+      .bg-wichtig::before {
+        background-color: #4bb9dd;
+        transform: translate(-50%, -50%) rotate(-1deg);
+      }
+      .bg-wichtig::after {
+        background-color: #addbe9;
+        transform: translate(-48%, -48%) rotate(-1deg);
+      }
+
+      /* Ganztagesklasse */
+      .bg-aufnahme::before {
+        background-color: #4bb9dd;
+        transform: translate(-52%, -52%) rotate(1deg);
+      }
+      .bg-aufnahme::after {
+        background-color: #addbe9;
+        transform: translate(-52%, -52%) rotate(1.1deg);
+      }
+
+      /* Make image-row images smaller on mobile */
+      @media (max-width: 750px) {
+        .image-row img {
+          width: 140px;
+          height: 140px;
+        }
+      }
+
+      /* Optional: even smaller for very narrow screens */
+      @media (max-width: 480px) {
+        .image-row img {
+          width: 120px;
+          height: 120px;
+        }
+      }
+
+      #aufnahme-text {
+        max-width: 900px;
+        margin: 0.8rem auto;
+        text-align: center;
+        line-height: 1.5;
+        font-size: 1.25rem;
+      }
+      #aufnahme-text p {
+        margin: 0.5em 0;
+      }
+      .intro-text {
+        max-width: 750px;         /* limits the width on large screens */
+        margin: 0 auto;           /* centers it horizontally */
+        text-align: center;       /* keeps lines centered */
+        line-height: 1.6;         /* keeps it readable */
+        font-size: 1.05rem;
+      }
+
+      /* Narrower and slightly smaller on mobile */
+      @media (max-width: 720px) {
+        .intro-text {
+          max-width: 90%;         /* takes up less space on smaller screens */
+          font-size: 1rem;
+          line-height: 1.5;
+        }
+      }
+
+      /* === Responsive scaling for larger screens === */
+      @media (min-width: 1200px) {
+        body {
+          font-size: 1.1rem;
+        }
+
+        .intro-text,
+        .contact,
+        .angebot-cards div,
+        #aufnahme-text {
+          font-size: 1.15rem;
+          line-height: 1.7;
+        }
+
+        h1, h2 {
+          font-size: 2.2rem;
+        }
+
+        .contact h2 {
+          font-size: 2.2rem; /* match or slightly smaller than main h1s */
+        }
+        .contact img {
+          width: 280px;
+          height: 280px;
+        }
+      }
+
+      @media (min-width: 1600px) {
+        body {
+          font-size: 1.25rem;
+        }
+
+        .intro-text,
+        .contact,
+        .angebot-cards div,
+        #aufnahme-text {
+          font-size: 1.3rem;
+          line-height: 1.75;
+        }
+
+        h1, h2 {
+          font-size: 2.5rem;
+        }
+
+        .contact h2 {
+          font-size: 2.5rem; /* match or slightly smaller than main h1s */
+        }
+
+        .angebot-cards {
+          max-width: 1100px;
+        }
+      }
+
+      /* === Flip animation for illus-wrapper (final smooth version) === */
+      .illus-wrapper {
+        display: inline-block;
+        perspective: 1000px;
+        cursor: pointer;
+        border-radius: 50%;        /* always circular */
+        overflow: hidden;           /* prevents square-to-circle flash */
+        transform-style: preserve-3d;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        will-change: transform;
+      }
+
+      /* Hover lift + shadow (remains circular) */
+      .illus-wrapper:hover {
+        transform: translateY(-6px) scale(1.03);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+      }
+
+      /* The flipping card inside */
+      .flip-card {
+        width: 250px;
+        height: 250px;
+        position: relative;
+        border-radius: 50%;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      /* Inner rotation container */
+      .flip-inner {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s ease;
+        transform-style: preserve-3d;
+        position: relative;
+        border-radius: 50%;
+        transform-origin: center;
+      }
+
+      /* Front and back sides */
+      .flip-front,
+      .flip-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden; /* Safari fix */
+      }
+
+      /* Back side rotated */
+      .flip-back {
+        transform: rotateY(180deg);
+      }
+
+      /* Flipped state */
+      .flip-card.flipped .flip-inner {
+        transform: rotateY(180deg);
+        will-change: transform;
+      }
+
+      /* === Image alignment container === */
+      .img-adjust {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 50%;
+        position: relative;
+      }
+
+      /* The image itself */
+      .img-adjust img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 110%; /* small zoom to allow offset */
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+        display: block;
+      }
+
+      /* === Per-image fine-tuning === */
+      .image-row .illus-wrapper:nth-child(1) .img-adjust img {
+        transform: translate(calc(-50% + 10px), -50%); /* move right */
+      }
+
+      .image-row .illus-wrapper:nth-child(2) .img-adjust img {
+        transform: translate(calc(-50% - 4px), -50%); /* move left */
+      }
+
+      .image-row .illus-wrapper:nth-child(3) .img-adjust img {
+        transform: translate(-50%, -50%); /* centered */
+      }
+
+      /* Responsive sizing */
+      @media (max-width: 750px) {
+        .flip-card {
+          width: 140px;
+          height: 140px;
+        }
+      }
+
+      .angebot-cards,
+      #aufnahme-text {
+        opacity: 0;
+        transform: translateY(10px);
+        max-height: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        overflow: hidden;
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease,
+          max-height 0.6s ease,
+          margin 0.4s ease;
+        pointer-events: none;
+      }
+
+      .angebot-cards.visible,
+      #aufnahme-text.visible {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 1500px; /* enough to show full content */
+        margin-top: 1.5rem; /* normal spacing when open */
+        margin-bottom: 1.5rem;
+        pointer-events: auto;
+      }
+
+      /* optional: small stagger effect for cards */
+      .angebot-cards.visible div {
+        animation: fadeUp 0.5s ease forwards;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .flip-front img,
+      .flip-back img {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+
+
+
+      
     </style>
   </head>
   <body>
     <header class="fade-in multi-header">
-      <img src="images/logo-hidden.png" alt="Ballsportakademie Logo" />
+      <img src="images/logo.png" alt="Ballsportakademie Logo" />
     </header>
-    <div class="heading-wrapper">
-      <div class="tilted-bg">
-        <h1>Coming soon!</h1>
-      </div>
-    </div>
   </section>
 
-    <!--
-<section class="intro-row">
-      <div class="heading-wrapper">
-        <div class="tilted-bg">
-          <h1>Willkommen an der Ballsport Akademie!</h1>
-        </div>
-        <img
-          src="images/baelle.png"
-          alt="Ballsportakademie Logo"
-          class="baelle-logo"
-        />
-        <strong>
-          Fußball, Tennis oder Volleyball sind das Größte für dich? <br />Dann
-          bist du bei uns genau richtig!
-        </strong>
-      </div>
+    <section class="intro-row">
+          <div class="heading-wrapper">
+            <div class="tilted-bg">
+              <h1>Willkommen an der Ballsport Akademie!</h1>
+            </div>
+            <strong class="intro-lead">
+              Fußball, Tennis oder Volleyball sind das Größte für dich? <br />
+              Dann bist du bei uns genau richtig!<br />
+            </strong>            
+            <div class="intro-text">
+              Die Ballsport Akademie an der Mittelschule Reichenau mit 
+              Schwerpunkt Fußball, Tennis und Volleyball bietet ambitionierten Talenten 
+              parallel zu ihrem sportlichen Training und ihren Wettkampfeinsätzen
+              eine fundierte schulische Ausbildung.
+            </div>
+          </div>
     </section>
 
     <section class="image-row fade-in">
       <div class="illus-wrapper">
-        <img src="images/illus/voll.png" alt="Sport Illustration 2" />
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="img-adjust">
+                <img src="images/illus/voll.png" alt="Volleyball" />
+              </div>            </div>
+            <div class="flip-back">
+              <div class="img-adjust">
+                <img src="images/illus/voll.png" alt="Volleyball" />
+              </div>            </div>
+          </div>
+        </div>
       </div>
+    
       <div class="illus-wrapper">
-        <img src="images/illus/fuss.png" alt="Sport Illustration 3" />
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <img src="images/illus/fuss.png" alt="Sport Illustration Fußball" />
+            </div>
+            <div class="flip-back">
+              <img src="images/illus/fuss.png" alt="Sport Illustration Fußball (back)" />
+            </div>
+          </div>
+        </div>
       </div>
+    
       <div class="illus-wrapper">
-        <img src="images/illus/tenn.png" alt="Sport Illustration 1" />
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <img src="images/illus/tenn.png" alt="Sport Illustration Tennis" />
+            </div>
+            <div class="flip-back">
+              <img src="images/illus/tenn.png" alt="Sport Illustration Tennis (back)" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+    
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg bg-kickoff" id="kick-off">
+          <h1>Einladung zum Kick-Off-Event!</h1>
+        </div>
+
+        <div class="person einlad-lead">
+          <strong>Wann?</strong><br />
+          Wann: 3. Dezember 2025, 17:30 Uhr<br />
+          <strong>Wo?</strong><br />
+          MS Reichenau, Burghard-Breitner-Straße 22<br />
+           6020 Innsbruck<br />
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg bg-angebot" id="angebot-toggle-1">
+          <h1>Unser Angebot?</h1>
+        </div>
+    
+        <!-- 👇 Hidden by default -->
+        <div id="angebot-content-1" class="angebot-cards fade-in-once">
+          <div>Verschränkte Ganztagesklasse</div>
+          <div>Offener & projektorientierter Unterricht</div>
+          <div>Moderne Infrastruktur & Sportanlagen</div>
+          <div>Sportspezifische & multisportive Ausbildung</div>
+          <div>
+            Abstimmung mit Schule und Vereinen bei Turnieren,
+            Auswärtsfahrten und sportlichen Veranstaltungen
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg clickable bg-ganztags" id="angebot-toggle-2">
+          <h1>Ganztagesklasse?</h1>
+        </div>
+    
+        <!-- Hidden by default -->
+        <div id="angebot-content-2" class="angebot-cards fade-in-once">
+          <div>Die Schüler:innen werden von Montag bis
+            Donnerstag bis 16 Uhr, an Freitagen bis 14 Uhr,
+            von Pädagog:innen in der Schule betreut. Somit
+            bleibt mehr Zeit für das individuelle Training im
+            Stammverein und Auswahlteam.</div>
+          <div>Die verschränkte Ganztagesklasse bietet einen
+            rhythmisierten Tagesablauf mit abwechselnden
+            Lern-, Sport- und Freizeiteinheiten. Hausaufgaben
+            werden während der Schulzeit bearbeitet.</div>
+          <div>Die Kosten für den Mittagstisch an der Schule
+            betragen pro konsumierter Mahlzeit € 5,10.</div>
+          <div>Für die ganztägige Betreuung fällt ein Betrag
+            von € 35,- pro Monat an.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg clickable bg-wichtig" id="angebot-toggle-3">
+          <h1>Was ist uns wichtig?</h1>
+        </div>
+    
+        <!-- Hidden by default -->
+        <div id="angebot-content-3" class="angebot-cards fade-in-once">
+          <div>Intensive Zusammenarbeit zwischen der Schule, den Trainer:innen im Verein/Verband und den Eltern.</div>
+          <div>Vermittlung sporttheoretischer Inhalte im Unterricht.</div>
+          <div>Sportwissenschaftliche Begleitung.</div>
+          <div>Trainingsdokumentation.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg clickable bg-aufnahme" id="angebot-toggle-4">
+          <h1>Aufnahme?</h1>
+        </div>
+    
+        <div id="aufnahme-text" 
+            class="hidden fade-in-once" 
+            style="
+              max-width: 900px; 
+              margin: 0.8rem auto;     /* reduced vertical space */
+              text-align: center; 
+              line-height: 1.5;
+              font-size: 1.25rem;      /* about 2 sizes larger */
+            ">
+          <p style="margin: 0.5em 0;">
+            Die Ballsport Akademie wird an der Mittelschule Reichenau geführt. 
+            Sie steht allen Schüler:innen aus Tirol offen!
+          </p>
+          <strong>Aufnahmekriterien:</strong>
+        </div>
+    
+        <!--  Hidden by default -->
+        <div id="angebot-content-4" class="angebot-cards fade-in-once">
+          <div>Sportartspezifischer sportmotorischer Test in Fußball, Tennis und Volleyball (durch unabhängige Verbandstrainer:innen)</div>
+          <div>Aufnahmegespräch mit Eltern und Schüler:in</div>
+          <div>Sportärztliche Untersuchung</div>
+          <div>Empfehlung vom Stammverein oder Verband</div>
+        </div>
+      </div>
+    </section>
+    
+    
 
     <section class="contact fade-in">
       <div class="tilted-bg">
@@ -433,6 +1015,13 @@
     <footer class="fade-in">
       <div class="sponsors">
         <a
+          href="https://www.innsbruck.gv.at"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="images/sponsor2.jpeg" alt="Innsbruck Logo" />
+        </a>
+        <a
           href="https://bildung-tirol.gv.at"
           target="_blank"
           rel="noopener noreferrer"
@@ -452,13 +1041,6 @@
         <a href="https://www.tvv.at" target="_blank" rel="noopener noreferrer">
           <img src="images/sponsor6.png" alt="Volleyball Verband Logo" />
         </a>
-        <a
-          href="https://www.innsbruck.gv.at"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="images/sponsor2.jpeg" alt="Innsbruck Logo" />
-        </a>
       </div>
       <p>© 2025 Ballsport Akademie. Alle Rechte vorbehalten.</p>
     </footer>
@@ -476,7 +1058,42 @@
         { threshold: 0.1 }
       );
       elements.forEach((el) => observer.observe(el));
+
+      const toggles = document.querySelectorAll('[id^="angebot-toggle"]');
+
+      toggles.forEach((toggle) => {
+        const num = toggle.id.split("-").pop();
+        const content = document.getElementById(`angebot-content-${num}`);
+        const extraText = document.getElementById("aufnahme-text");
+
+        toggle.addEventListener("click", () => {
+          const isVisible = content.classList.contains("visible");
+
+          // Hide all other sections first
+          document.querySelectorAll(".angebot-cards, #aufnahme-text").forEach((el) => {
+            el.classList.remove("visible");
+          });
+
+          // Toggle this one
+          if (!isVisible) {
+            content.classList.add("visible");
+            if (num === "4" && extraText) extraText.classList.add("visible");
+          } else {
+            content.classList.remove("visible");
+            if (num === "4" && extraText) extraText.classList.remove("visible");
+          }
+        });
+      });
+
+
+      document.querySelectorAll('.illus-wrapper').forEach(wrapper => {
+        wrapper.addEventListener('click', () => {
+          wrapper.querySelector('.flip-card').classList.toggle('flipped');
+        });
+      });
+
+
+
     </script>
-     -->
   </body>
 </html>
