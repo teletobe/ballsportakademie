@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ballsport Akademie</title>
+    <link rel="icon" type="image/png" href="./favicon.png?v=2" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bright-green: #3c9e45;
+        --dark-green: #1d7d3e;
+        --turquoise: #6fbdba;
+        --dark-blue: #003e6b;
+        --light-bg: #f9fbfc;
+      }
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        background-color: #ffffff;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* --- HEADER --- */
+      /* --- MULTI-LAYER GEOMETRIC HEADER --- */
+      .multi-header {
+        position: relative;
+        text-align: center;
+        color: #ffffff;
+        padding: 3rem 1rem 4rem;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      /* Repeating angled layers using ::after and extra pseudo-elements */
+      .multi-header::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          -12deg,
+          #1d7d3e 0%,
+          #1d7d3e 10%,
+          #3c9e45 10%,
+          #3c9e45 30%,
+          #1d7d3e 30%,
+          #1d7d3e 50%,
+          #3c9e45 50%,
+          #3c9e45 70%,
+          #1d7d3e 70%,
+          #1d7d3e 85%,
+          #3c9e45 85%,
+          #3c9e45 70%
+        );
+        z-index: -4;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
+      }
+
+      /* Logo and text styles */
+      .multi-header img {
+        max-width: 160px;
+        height: auto;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+      }
+
+      .multi-header h1 {
+        font-size: 2rem;
+        margin: 0.5rem 0;
+        font-weight: 600;
+      }
+
+      .multi-header .coming-soon {
+        font-size: 1.2rem;
+        color: var(--bright-green);
+        margin-bottom: 0;
+      }
+
+      header img {
+        max-width: 160px;
+        height: auto;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        margin: 0.5rem 0;
+        font-weight: 600;
+      }
+
+      .coming-soon {
+        font-size: 1.2rem;
+        color: var(--dark-green);
+        margin-bottom: 0;
+      }
+
+      .image-row {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin: 3rem 0;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s ease;
+      }
+
+      .image-row.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .image-row img {
+        object-fit: contain;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        border: 0px solid var(--turquoise);
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+
+      .image-row img:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: var(--turquoise);
+      }
+
+      /* --- CONTACT --- */
+      .contact {
+        text-align: center;
+        margin-bottom: 3rem;
+        line-height: 1.6;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s ease;
+      }
+
+      .contact.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .contact h2 {
+        font-size: 1.6rem;
+        margin: 2rem 0 1rem;
+        color: var(--dark-blue);
+      }
+
+      .contact .person {
+        margin-bottom: 1.5rem;
+      }
+
+      a {
+        color: #0696c7;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      a:hover {
+        color: var(--dark-blue);
+        text-decoration: underline;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background-color: #ffffff;
+        padding: 4rem 1rem;
+        text-align: center;
+        border-top: 5px solid var(--bright-green);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s ease;
+      }
+
+      footer.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .sponsors {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .sponsors img {
+        max-height: 100px;
+        object-fit: contain;
+        filter: grayscale(20%);
+        transition: transform 0.3s ease, filter 0.3s ease, border 0.3s ease;
+        border-radius: 6px;
+      }
+
+      .sponsors img:hover {
+        transform: translateY(-3px);
+        filter: grayscale(0%);
+        border: 2px solid var(--turquoise);
+      }
+
+      .sponsors img:first-of-type {
+        max-height: 80px;
+      }
+
+      footer p {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 1rem;
+      }
+
+      .intro-row {
+        text-align: center;
+        line-height: 1.6;
+      }
+
+      .heading-wrapper {
+        display: flex;
+        flex-direction: column; /* stack h1 and strong vertically */
+        align-items: center; /* center text */
+        gap: 1rem; /* spacing between elements */
+      }
+
+      .tilted-bg {
+        display: inline-block;
+        position: relative;
+      }
+
+      /* First rectangle (dark turquoise, -3deg) */
+      .tilted-bg::before {
+        content: "";
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-51%, -51%) rotate(-0.6deg);
+        width: 105%;
+        height: 2.8em;
+        background-color: #4bb9dd; /* dark turquoise */
+        z-index: -2; /* behind text but above second rectangle */
+      }
+
+      /* Second rectangle (slightly lighter, 2deg) */
+      .tilted-bg::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-0.8deg);
+        width: 106%;
+        height: 3.4em;
+        background-color: #addbe9; /* slightly lighter green/turquoise */
+        z-index: -3; /* behind the first rectangle */
+      }
+
+      .baelle-logo {
+        width: 150px;
+      }
+
+      .kontakt-logo {
+        text-align: center;
+        margin-top: 2rem;
+      }
+
+      .kontakt-logo img {
+        width: 200px; /* or whatever size looks good */
+        height: auto;
+        border-radius: 150px; /* optional */
+      }
+
+      .kontakt-logo img:hover {
+        transform: translateY(-3px);
+        filter: grayscale(0%);
+        border: 2px solid var(--turquoise);
+      }
+
+      .contact .tilted-bg::before {
+        transform: translate(-50%, -15%) rotate(0.9deg); /* positive angle instead of negative */
+        width: 120%;
+        height: 2.4em;
+        background-color: #4bb9dd;
+        z-index: -2;
+        border-radius: 0;
+      }
+
+      .contact .tilted-bg::after {
+        transform: translate(-44%, -40%) rotate(0.7deg); /* second rectangle slightly tilted too */
+        width: 122%;
+        height: 2.8em;
+        background-color: #addbe9;
+        z-index: -3;
+        border-radius: 0;
+      }
+
+      .tilted-bg h1,
+      .tilted-bg h2 {
+        color: #003e6b; /* dark blue */
+      }
+
+      @media (max-width: 1080px) {
+        .sponsors {
+          flex-wrap: wrap;
+        }
+
+        .sponsors a:first-child,
+        .sponsors a:last-child {
+          flex-basis: 100%; /* forces first and last to take full width */
+          display: flex;
+          justify-content: center; /* centers the logos */
+        }
+      }
+
+      @media (max-width: 510px) {
+        .tilted-bg::before {
+          content: "";
+          position: absolute;
+          top: 45%;
+          left: 50%;
+          transform: translate(-51%, -51%) rotate(-0.6deg);
+          width: 105%;
+          height: 5.5em;
+          background-color: #4bb9dd; /* dark turquoise */
+          z-index: -2; /* behind text but above second rectangle */
+        }
+        .tilted-bg::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(-0.8deg);
+          width: 106%;
+          height: 6.7em;
+          background-color: #addbe9; /* slightly lighter green/turquoise */
+          z-index: -3; /* behind the first rectangle */
+        }
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      [id^="angebot-toggle"] {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        filter: brightness(1.05);
+
+      }
+
+      [id^="angebot-toggle"]:hover {
+        transform: scale(1.03);
+        filter: brightness(1.12);
+      }
+      .fade-in-once {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease;
+      }
+
+      .fade-in-once.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+
+            .angebot-cards {
+        display: grid;
+        grid-template-columns: 1fr; /* 1 column on mobile */
+        gap: 1rem;
+        max-width: 900px;
+        margin: 2rem auto;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease;
+      }
+
+      .angebot-cards.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .angebot-cards div {
+        background: var(--turquoise);
+        color: #ffffff;
+        padding: 1.2rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-align: center;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      }
+
+      @media (min-width: 720px) {
+        .angebot-cards {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        /* Only make last card full width for the 5-item section */
+        #angebot-content-1 div:last-child {
+          grid-column: span 2;
+        }
+      }
+
+
+      /* Custom alternating background for Angebot cards */
+      .angebot-cards div:nth-child(1),
+      .angebot-cards div:nth-child(4) {
+        background: var(--bright-green);
+      }
+
+      .angebot-cards div:nth-child(2),
+      .angebot-cards div:nth-child(3),
+      .angebot-cards div:nth-child(5) {
+        background: var(--dark-green);
+      }
+
+      /* Mobile styling for Angebot cards */
+      @media (max-width: 720px) {
+        .angebot-cards {
+          grid-template-columns: 1fr; /* Single column layout */
+          padding: 0 1rem; /* Adds spacing on the left and right */
+        }
+
+        .angebot-cards div {
+          font-size: 1rem; /* Slightly smaller text */
+          margin: 0.5rem 0; /* Adds space between the cards */
+        }
+        
+      }
+
+      /* Override colors for mobile view */
+      @media (max-width: 720px) {
+        .angebot-cards div:nth-child(odd) {
+          background: var(--bright-green);
+        }
+
+        .angebot-cards div:nth-child(even) {
+          background: var(--dark-green);
+        }
+        .contact .tilted-bg{
+          margin-top:1em;
+        }
+
+        /* Add spacing between consecutive intro sections */
+        .intro-row + .intro-row {
+          margin-top: 4em;
+        }
+
+      }
+      /* Add spacing between consecutive intro sections */
+      .intro-row + .intro-row {
+        margin-top: 2em;
+      }
+
+      /* Kick-Off */
+.bg-kickoff::before {
+  background-color: #4bb9dd;
+  transform: translate(-50%, -50%) rotate(1deg);
+}
+.bg-kickoff::after {
+  background-color: #addbe9;
+  transform: translate(-48%, -48%) rotate(1deg);
+}
+
+/* Unser Angebot */
+.bg-angebot::before {
+  background-color: #4bb9dd;
+  transform: translate(-50%, -50%) rotate(-1deg);
+}
+.bg-angebot::after {
+  background-color: #addbe9;
+  transform: translate(-48%, -48%) rotate(-1deg);
+}
+
+/* Ganztagesklasse */
+.bg-ganztags::before {
+  background-color: #4bb9dd;
+  transform: translate(-52%, -52%) rotate(1deg);
+}
+.bg-ganztags::after {
+  background-color: #addbe9;
+  transform: translate(-52%, -52%) rotate(1.1deg);
+}
+
+/* Make image-row images smaller on mobile */
+@media (max-width: 750px) {
+  .image-row img {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* Optional: even smaller for very narrow screens */
+@media (max-width: 480px) {
+  .image-row img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+
+      
+    </style>
+  </head>
+  <body>
+    <header class="fade-in multi-header">
+      <img src="images/logo.png" alt="Ballsportakademie Logo" />
+    </header>
+  </section>
+
+    <section class="intro-row">
+          <div class="heading-wrapper">
+            <div class="tilted-bg">
+              <h1>Willkommen an der Ballsport Akademie!</h1>
+            </div>
+            <strong>
+              Fußball, Tennis oder Volleyball sind das Größte für dich? <br />Dann
+              bist du bei uns genau richtig!
+            </strong>
+          </div>
+    </section>
+
+    <section class="image-row fade-in">
+      <div class="illus-wrapper">
+        <img src="images/illus/voll.png" alt="Sport Illustration 2" />
+      </div>
+      <div class="illus-wrapper">
+        <img src="images/illus/fuss.png" alt="Sport Illustration 3" />
+      </div>
+      <div class="illus-wrapper">
+        <img src="images/illus/tenn.png" alt="Sport Illustration 1" />
+      </div>
+    </section>
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg bg-kickoff" id="kick-off">
+          <h1>Einladung zum Kick-Off-Event!</h1>
+        </div>
+
+        <div class="person">
+          <strong>Wann?</strong><br />
+          Wann: 3. Dezember 2025, 17:30 Uhr<br />
+          <strong>Wo?</strong><br />
+          MS Reichenau, Burghard-Breitner-Straße 22<br />
+           6020 Innsbruck<br />
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg bg-angebot" id="angebot-toggle-1">
+          <h1>Unser Angebot?</h1>
+        </div>
+    
+        <!-- 👇 Hidden by default -->
+        <div id="angebot-content-1" class="angebot-cards hidden fade-in-once">
+          <div>Verschränkte Ganztagesklasse</div>
+          <div>Offener & projektorientierter Unterricht</div>
+          <div>Moderne Infrastruktur & Sportanlagen</div>
+          <div>Sportspezifische & multisportive Ausbildung</div>
+          <div>
+            Abstimmung mit Schule und Vereinen bei Turnieren,
+            Auswärtsfahrten und sportlichen Veranstaltungen
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg clickable bg-ganztags" id="angebot-toggle-2">
+          <h1>Ganztagesklasse?</h1>
+        </div>
+    
+        <!-- 👇 Hidden by default -->
+        <div id="angebot-content-2" class="angebot-cards hidden fade-in-once">
+          <div>Die Schüler:innen werden von Montag bis
+            Donnerstag bis 16 Uhr, an Freitagen bis 14 Uhr,
+            von Pädagog:innen in der Schule betreut. Somit
+            bleibt mehr Zeit für das individuelle Training im
+            Stammverein und Auswahlteam.</div>
+          <div>Die verschränkte Ganztagesklasse bietet einen
+            rhythmisierten Tagesablauf mit abwechselnden
+            Lern-, Sport- und Freizeiteinheiten. Hausaufgaben
+            werden während der Schulzeit bearbeitet.</div>
+          <div>Die Kosten für den Mittagstisch an der Schule
+            betragen pro konsumierter Mahlzeit € 5,10.</div>
+          <div>Für die ganztägige Betreuung fällt ein Betrag
+            von € 35,- pro Monat an.</div>
+        </div>
+      </div>
+    </section>
+    
+
+    <section class="contact fade-in">
+      <div class="tilted-bg">
+        <h2>Kontakt</h2>
+      </div>
+
+      <div class="person">
+        <strong>Mittelschule Reichenau</strong><br />
+        Direktor Dipl.-Päd. Uwe Zanolin<br />
+        Burghard-Breitner-Straße 22 · 6020 Innsbruck<br />
+        Tel. +43 512 344475<br />
+        <a href="mailto:direktion@ms-reichenau.tsn.at"
+          >direktion@ms-reichenau.tsn.at</a
+        ><br />
+        <a href="https://www.ms-reichenau.tsn.at" target="_blank"
+          >www.ms-reichenau.tsn.at</a
+        >
+      </div>
+
+      <div class="person">
+        <strong>Ballsport Akademie</strong><br />
+        Koordinator: Christoph Ebead<br />
+        <a href="mailto:ballsportakademie@ms-reichenau.tsn.at"
+          >ballsportakademie@ms-reichenau.tsn.at</a
+        ><br />
+        <a href="https://www.ballsportakademie.at" target="_blank"
+          >www.ballsportakademie.at</a
+        >
+      </div>
+
+      <div class="kontakt-logo">
+        <a
+          href="https://ms-reichenau.tsn.at"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="images/MSreichenau.jpeg"
+            alt="Mittelschule Reichenau logo"
+          />
+        </a>
+      </div>
+    </section>
+
+    <footer class="fade-in">
+      <div class="sponsors">
+        <a
+          href="https://www.innsbruck.gv.at"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="images/sponsor2.jpeg" alt="Innsbruck Logo" />
+        </a>
+        <a
+          href="https://bildung-tirol.gv.at"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="images/sponsor3.jpeg" alt="Bildungsdir. Tirol Logo" />
+        </a>
+        <a
+          href="https://www.tennistirol.at"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="images/sponsor1.jpeg" alt="Tennis Logo" />
+        </a>
+        <a href="https://tfv.at" target="_blank" rel="noopener noreferrer">
+          <img src="images/sponsor4.png" alt="Tiroler Fussballverband Logo" />
+        </a>
+        <a href="https://www.tvv.at" target="_blank" rel="noopener noreferrer">
+          <img src="images/sponsor6.png" alt="Volleyball Verband Logo" />
+        </a>
+      </div>
+      <p>© 2025 Ballsport Akademie. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script>
+      const elements = document.querySelectorAll(".fade-in");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      elements.forEach((el) => observer.observe(el));
+
+      const toggles = document.querySelectorAll('[id^="angebot-toggle"]');
+
+      toggles.forEach((toggle) => {
+        const num = toggle.id.split("-").pop(); // Extract 1 or 2
+        const content = document.getElementById(`angebot-content-${num}`);
+
+        toggle.addEventListener("click", () => {
+          content.classList.toggle("hidden");
+          content.classList.toggle("visible");
+        });
+      });
+
+    </script>
+  </body>
+</html>
