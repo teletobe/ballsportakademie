@@ -491,6 +491,26 @@
   transform: translate(-52%, -52%) rotate(1.1deg);
 }
 
+/* Ganztagesklasse */
+.bg-wichtig::before {
+  background-color: #4bb9dd;
+  transform: translate(-50%, -50%) rotate(-1deg);
+}
+.bg-wichtig::after {
+  background-color: #addbe9;
+  transform: translate(-48%, -48%) rotate(-1deg);
+}
+
+/* Ganztagesklasse */
+.bg-aufnahme::before {
+  background-color: #4bb9dd;
+  transform: translate(-52%, -52%) rotate(1deg);
+}
+.bg-aufnahme::after {
+  background-color: #addbe9;
+  transform: translate(-52%, -52%) rotate(1.1deg);
+}
+
 /* Make image-row images smaller on mobile */
 @media (max-width: 750px) {
   .image-row img {
@@ -506,6 +526,18 @@
     height: 120px;
   }
 }
+
+#aufnahme-text {
+  max-width: 900px;
+  margin: 0.8rem auto;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 1.25rem;
+}
+#aufnahme-text p {
+  margin: 0.5em 0;
+}
+
 
 
       
@@ -601,6 +633,55 @@
         </div>
       </div>
     </section>
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg clickable bg-wichtig" id="angebot-toggle-3">
+          <h1>Was ist uns wichtig?</h1>
+        </div>
+    
+        <!-- 👇 Hidden by default -->
+        <div id="angebot-content-3" class="angebot-cards hidden fade-in-once">
+          <div>Intensive Zusammenarbeit zwischen der Schule, den Trainer:innen im Verein/Verband und den Eltern.</div>
+          <div>Vermittlung sporttheoretischer Inhalte im Unterricht.</div>
+          <div>Sportwissenschaftliche Begleitung.</div>
+          <div>Trainingsdokumentation.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-row">
+      <div class="heading-wrapper">
+        <div class="tilted-bg clickable bg-aufnahme" id="angebot-toggle-4">
+          <h1>Aufnahme?</h1>
+        </div>
+    
+        <div id="aufnahme-text" 
+            class="hidden fade-in-once" 
+            style="
+              max-width: 900px; 
+              margin: 0.8rem auto;     /* reduced vertical space */
+              text-align: center; 
+              line-height: 1.5;
+              font-size: 1.25rem;      /* about 2 sizes larger */
+            ">
+          <p style="margin: 0.5em 0;">
+            Die Ballsport Akademie wird an der Mittelschule Reichenau geführt. 
+            Sie steht allen Schüler:innen aus Tirol offen!
+          </p>
+          <strong>Aufnahmekriterien:</strong>
+        </div>
+    
+        <!--  Hidden by default -->
+        <div id="angebot-content-4" class="angebot-cards hidden fade-in-once">
+          <div>Sportartspezifischer sportmotorischer Test in Fußball, Tennis und Volleyball (durch unabhängige Verbandstrainer:innen)</div>
+          <div>Aufnahmegespräch mit Eltern und Schüler:in</div>
+          <div>Sportärztliche Untersuchung</div>
+          <div>Empfehlung vom Stammverein oder Verband</div>
+        </div>
+      </div>
+    </section>
+    
     
 
     <section class="contact fade-in">
@@ -696,12 +777,19 @@
       const toggles = document.querySelectorAll('[id^="angebot-toggle"]');
 
       toggles.forEach((toggle) => {
-        const num = toggle.id.split("-").pop(); // Extract 1 or 2
+        const num = toggle.id.split("-").pop();
         const content = document.getElementById(`angebot-content-${num}`);
+        const extraText = document.getElementById("aufnahme-text");
 
         toggle.addEventListener("click", () => {
           content.classList.toggle("hidden");
           content.classList.toggle("visible");
+
+          // Only toggle the extra text for Aufnahme (num == 4)
+          if (num === "4" && extraText) {
+            extraText.classList.toggle("hidden");
+            extraText.classList.toggle("visible");
+          }
         });
       });
 
