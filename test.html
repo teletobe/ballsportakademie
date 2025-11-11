@@ -29,48 +29,47 @@
         overflow-x: hidden;
       }
 
-      /* --- HEADER --- */
-      /* --- MULTI-LAYER GEOMETRIC HEADER --- */
       .multi-header {
-        position: relative;
-        text-align: center;
-        color: #ffffff;
-        padding: 3rem 1rem 4rem;
-        overflow: hidden;
-        z-index: 1;
-      }
+  position: relative;
+  text-align: center;
+  color: #ffffff;
+  padding: 1.5rem 1rem 2.5rem; /* ↓ less top and bottom padding */
+  overflow: hidden;
+  z-index: 1;
+}
 
-      /* Repeating angled layers using ::after and extra pseudo-elements */
-      .multi-header::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          -12deg,
-          #1d7d3e 0%,
-          #1d7d3e 10%,
-          #3c9e45 10%,
-          #3c9e45 30%,
-          #1d7d3e 30%,
-          #1d7d3e 50%,
-          #3c9e45 50%,
-          #3c9e45 70%,
-          #1d7d3e 70%,
-          #1d7d3e 85%,
-          #3c9e45 85%,
-          #3c9e45 70%
-        );
-        z-index: -4;
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
-      }
+.multi-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    -12deg,
+    #1d7d3e 0%,
+    #1d7d3e 10%,
+    #3c9e45 10%,
+    #3c9e45 30%,
+    #1d7d3e 30%,
+    #1d7d3e 50%,
+    #3c9e45 50%,
+    #3c9e45 70%,
+    #1d7d3e 70%,
+    #1d7d3e 85%,
+    #3c9e45 85%,
+    #3c9e45 70%
+  );
+  z-index: -4;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 95%); /* ↑ slightly shallower angle */
+}
 
-      /* Logo and text styles */
-      .multi-header img {
-        max-width: 160px;
-        height: auto;
-        margin-bottom: 1rem;
-        border-radius: 8px;
-      }
+
+.multi-header img {
+  max-width: 200px;
+  height: auto;
+  margin-top: 2rem;    /* pushes it lower */
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
 
       .multi-header h1 {
         font-size: 2rem;
@@ -462,81 +461,104 @@
       }
 
       /* Kick-Off */
-.bg-kickoff::before {
-  background-color: #4bb9dd;
-  transform: translate(-50%, -50%) rotate(1deg);
-}
-.bg-kickoff::after {
-  background-color: #addbe9;
-  transform: translate(-48%, -48%) rotate(1deg);
-}
+      .bg-kickoff::before {
+        background-color: #4bb9dd;
+        transform: translate(-50%, -50%) rotate(1deg);
+      }
+      .bg-kickoff::after {
+        background-color: #addbe9;
+        transform: translate(-48%, -48%) rotate(1deg);
+      }
 
-/* Unser Angebot */
-.bg-angebot::before {
-  background-color: #4bb9dd;
-  transform: translate(-50%, -50%) rotate(-1deg);
-}
-.bg-angebot::after {
-  background-color: #addbe9;
-  transform: translate(-48%, -48%) rotate(-1deg);
-}
+      /* Unser Angebot */
+      .bg-angebot::before {
+        background-color: #4bb9dd;
+        transform: translate(-50%, -50%) rotate(-1deg);
+      }
+      .bg-angebot::after {
+        background-color: #addbe9;
+        transform: translate(-48%, -48%) rotate(-1deg);
+      }
 
-/* Ganztagesklasse */
-.bg-ganztags::before {
-  background-color: #4bb9dd;
-  transform: translate(-52%, -52%) rotate(1deg);
-}
-.bg-ganztags::after {
-  background-color: #addbe9;
-  transform: translate(-52%, -52%) rotate(1.1deg);
-}
+      /* Ganztagesklasse */
+      .bg-ganztags::before {
+        background-color: #4bb9dd;
+        transform: translate(-52%, -52%) rotate(1deg);
+      }
+      .bg-ganztags::after {
+        background-color: #addbe9;
+        transform: translate(-52%, -52%) rotate(1.1deg);
+      }
 
-/* Ganztagesklasse */
-.bg-wichtig::before {
-  background-color: #4bb9dd;
-  transform: translate(-50%, -50%) rotate(-1deg);
-}
-.bg-wichtig::after {
-  background-color: #addbe9;
-  transform: translate(-48%, -48%) rotate(-1deg);
-}
+      /* Ganztagesklasse */
+      .bg-wichtig::before {
+        background-color: #4bb9dd;
+        transform: translate(-50%, -50%) rotate(-1deg);
+      }
+      .bg-wichtig::after {
+        background-color: #addbe9;
+        transform: translate(-48%, -48%) rotate(-1deg);
+      }
 
-/* Ganztagesklasse */
-.bg-aufnahme::before {
-  background-color: #4bb9dd;
-  transform: translate(-52%, -52%) rotate(1deg);
-}
-.bg-aufnahme::after {
-  background-color: #addbe9;
-  transform: translate(-52%, -52%) rotate(1.1deg);
-}
+      /* Ganztagesklasse */
+      .bg-aufnahme::before {
+        background-color: #4bb9dd;
+        transform: translate(-52%, -52%) rotate(1deg);
+      }
+      .bg-aufnahme::after {
+        background-color: #addbe9;
+        transform: translate(-52%, -52%) rotate(1.1deg);
+      }
 
-/* Make image-row images smaller on mobile */
-@media (max-width: 750px) {
-  .image-row img {
-    width: 140px;
-    height: 140px;
-  }
-}
+      /* Make image-row images smaller on mobile */
+      @media (max-width: 750px) {
+        .image-row img {
+          width: 140px;
+          height: 140px;
+        }
+      }
 
-/* Optional: even smaller for very narrow screens */
-@media (max-width: 480px) {
-  .image-row img {
-    width: 120px;
-    height: 120px;
-  }
-}
+      /* Optional: even smaller for very narrow screens */
+      @media (max-width: 480px) {
+        .image-row img {
+          width: 120px;
+          height: 120px;
+        }
+      }
 
-#aufnahme-text {
-  max-width: 900px;
-  margin: 0.8rem auto;
-  text-align: center;
-  line-height: 1.5;
-  font-size: 1.25rem;
-}
-#aufnahme-text p {
-  margin: 0.5em 0;
-}
+      #aufnahme-text {
+        max-width: 900px;
+        margin: 0.8rem auto;
+        text-align: center;
+        line-height: 1.5;
+        font-size: 1.25rem;
+      }
+      #aufnahme-text p {
+        margin: 0.5em 0;
+      }
+      .intro-text {
+        max-width: 750px;         /* limits the width on large screens */
+        margin: 0 auto;           /* centers it horizontally */
+        text-align: center;       /* keeps lines centered */
+        line-height: 1.6;         /* keeps it readable */
+        font-size: 1.05rem;
+      }
+
+      /* Narrower and slightly smaller on mobile */
+      @media (max-width: 720px) {
+        .intro-text {
+          max-width: 90%;         /* takes up less space on smaller screens */
+          font-size: 1rem;
+          line-height: 1.5;
+        }
+      }
+
+      @media (min-width: 1500px) {
+        body {
+          transform: scale(1.25);
+          transform-origin: top center;
+        }
+      }
 
 
 
@@ -558,10 +580,10 @@
               Fußball, Tennis oder Volleyball sind das Größte für dich? <br />Dann
               bist du bei uns genau richtig!<br />
             </strong>
-            <div>
-              Die Ballsport Akademie an der Mittelschule Reichenau mit <br />
-              Schwerpunkt Fußball, Tennis und Volleyball bietet ambitionierten Talenten <br />
-              parallel zu ihrem sportlichen Training und ihren Wettkampfeinsätzen <br />
+            <div class="intro-text">
+              Die Ballsport Akademie an der Mittelschule Reichenau mit 
+              Schwerpunkt Fußball, Tennis und Volleyball bietet ambitionierten Talenten 
+              parallel zu ihrem sportlichen Training und ihren Wettkampfeinsätzen
               eine fundierte schulische Ausbildung.
             </div>
           </div>
