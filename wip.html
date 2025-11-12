@@ -29,7 +29,7 @@
         overflow-x: hidden;
       }
 
-      .multi-header {
+            .multi-header {
         position: relative;
         text-align: center;
         color: #ffffff;
@@ -58,21 +58,18 @@
           #3c9e45 70%
         );
         z-index: -4;
-        clip-path: polygon(
-          0 0,
-          100% 0,
-          100% 100%,
-          0 95%
-        ); /*  slightly shallower angle */
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 95%); /*  slightly shallower angle */
       }
+
 
       .multi-header img {
         max-width: 200px;
         height: auto;
-        margin-top: 2rem; /* pushes it lower */
+        margin-top: 2rem;    /* pushes it lower */
         margin-bottom: 1rem;
         border-radius: 8px;
       }
+
 
       .multi-header h1 {
         font-size: 2rem;
@@ -130,6 +127,8 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease,
           border-color 0.3s ease;
       }
+
+      
 
       /* --- CONTACT --- */
       .contact {
@@ -358,6 +357,7 @@
         cursor: pointer;
         transition: transform 0.2s ease;
         filter: brightness(1.05);
+
       }
 
       [id^="angebot-toggle"]:hover {
@@ -374,6 +374,7 @@
         opacity: 1;
         transform: translateY(0);
       }
+
 
       .angebot-cards {
         display: grid;
@@ -399,11 +400,11 @@
         font-weight: 600;
         font-size: 1.1rem;
         text-align: center;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 
         /* vertical centering */
         display: flex;
-        align-items: center; /* centers text vertically */
+        align-items: center;   /* centers text vertically */
         justify-content: center; /* centers text horizontally */
         text-align: center;
       }
@@ -418,6 +419,7 @@
           grid-column: span 2;
         }
       }
+
 
       /* Custom alternating background for Angebot cards */
       .angebot-cards div:nth-child(1),
@@ -442,6 +444,7 @@
           font-size: 1rem; /* Slightly smaller text */
           margin: 0.5rem 0; /* Adds space between the cards */
         }
+        
       }
 
       /* Override colors for mobile view */
@@ -453,14 +456,15 @@
         .angebot-cards div:nth-child(even) {
           background: var(--dark-green);
         }
-        .contact .tilted-bg {
-          margin-top: 1em;
+        .contact .tilted-bg{
+          margin-top:1em;
         }
 
         /* Add spacing between consecutive intro sections */
         .intro-row + .intro-row {
           margin-top: 4em;
         }
+
       }
       /* Add spacing between consecutive intro sections */
       .intro-row + .intro-row {
@@ -544,17 +548,17 @@
         margin: 0.5em 0;
       }
       .intro-text {
-        max-width: 750px; /* limits the width on large screens */
-        margin: 0 auto; /* centers it horizontally */
-        text-align: center; /* keeps lines centered */
-        line-height: 1.6; /* keeps it readable */
+        max-width: 750px;         /* limits the width on large screens */
+        margin: 0 auto;           /* centers it horizontally */
+        text-align: center;       /* keeps lines centered */
+        line-height: 1.6;         /* keeps it readable */
         font-size: 1.05rem;
       }
 
       /* Narrower and slightly smaller on mobile */
       @media (max-width: 720px) {
         .intro-text {
-          max-width: 90%; /* takes up less space on smaller screens */
+          max-width: 90%;         /* takes up less space on smaller screens */
           font-size: 1rem;
           line-height: 1.5;
         }
@@ -574,8 +578,7 @@
           line-height: 1.7;
         }
 
-        h1,
-        h2 {
+        h1, h2 {
           font-size: 2.2rem;
         }
 
@@ -601,8 +604,7 @@
           line-height: 1.75;
         }
 
-        h1,
-        h2 {
+        h1, h2 {
           font-size: 2.5rem;
         }
 
@@ -620,8 +622,8 @@
         display: inline-block;
         perspective: 1000px;
         cursor: pointer;
-        border-radius: 50%; /* always circular */
-        overflow: hidden; /* prevents square-to-circle flash */
+        border-radius: 50%;        /* always circular */
+        overflow: hidden;           /* prevents square-to-circle flash */
         transform-style: preserve-3d;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         backface-visibility: hidden;
@@ -723,25 +725,19 @@
         }
       }
 
-      /* generic fade-ins should NOT collapse layout */
-      .fade-in,
-      .fade-in-once {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-      }
-
-      /* only the toggle sections collapse when closed */
       .angebot-cards,
       #aufnahme-text {
         opacity: 0;
         transform: translateY(10px);
-        transition: opacity 0.5s ease, transform 0.5s ease, max-height 0.6s ease,
-          margin 0.4s ease;
         max-height: 0;
         margin-top: 0;
         margin-bottom: 0;
         overflow: hidden;
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease,
+          max-height 0.6s ease,
+          margin 0.4s ease;
         pointer-events: none;
       }
 
@@ -783,39 +779,31 @@
         border-radius: 50%;
       }
 
-      html,
-      body {
-        overflow-x: hidden;
-        width: 100%;
-        overflow-y: auto;
-        min-height: 100%;
-      }
-
-      .preload * {
-        transition: none !important;
-      }
+      
     </style>
   </head>
   <body>
     <header class="fade-in multi-header">
       <img src="images/logo.png" alt="Ballsportakademie Logo" />
     </header>
+  </section>
+
     <section class="intro-row">
-      <div class="heading-wrapper">
-        <div class="tilted-bg">
-          <h1>Willkommen an der Ballsport Akademie!</h1>
-        </div>
-        <strong class="intro-lead">
-          Fußball, Tennis oder Volleyball sind das Größte für dich? <br />
-          Dann bist du bei uns genau richtig!<br />
-        </strong>
-        <div class="intro-text">
-          Die Ballsport Akademie an der Mittelschule Reichenau mit Schwerpunkt
-          Fußball, Tennis und Volleyball bietet ambitionierten Talenten parallel
-          zu ihrem sportlichen Training und ihren Wettkampfeinsätzen eine
-          fundierte schulische Ausbildung.
-        </div>
-      </div>
+          <div class="heading-wrapper">
+            <div class="tilted-bg">
+              <h1>Willkommen an der Ballsport Akademie!</h1>
+            </div>
+            <strong class="intro-lead">
+              Fußball, Tennis oder Volleyball sind das Größte für dich? <br />
+              Dann bist du bei uns genau richtig!<br />
+            </strong>            
+            <div class="intro-text">
+              Die Ballsport Akademie an der Mittelschule Reichenau mit 
+              Schwerpunkt Fußball, Tennis und Volleyball bietet ambitionierten Talenten 
+              parallel zu ihrem sportlichen Training und ihren Wettkampfeinsätzen
+              eine fundierte schulische Ausbildung.
+            </div>
+          </div>
     </section>
 
     <section class="image-row fade-in">
@@ -825,55 +813,42 @@
             <div class="flip-front">
               <div class="img-adjust">
                 <img src="images/illus/voll.png" alt="Volleyball" />
-              </div>
-            </div>
+              </div>            </div>
             <div class="flip-back">
               <div class="img-adjust">
                 <img src="images/illus/voll.png" alt="Volleyball" />
-              </div>
-            </div>
+              </div>            </div>
           </div>
         </div>
       </div>
-
+    
       <div class="illus-wrapper">
         <div class="flip-card">
           <div class="flip-inner">
             <div class="flip-front">
-              <img
-                src="images/illus/fuss.png"
-                alt="Sport Illustration Fußball"
-              />
+              <img src="images/illus/fuss.png" alt="Sport Illustration Fußball" />
             </div>
             <div class="flip-back">
-              <img
-                src="images/illus/fuss.png"
-                alt="Sport Illustration Fußball (back)"
-              />
+              <img src="images/illus/fuss.png" alt="Sport Illustration Fußball (back)" />
             </div>
           </div>
         </div>
       </div>
-
+    
       <div class="illus-wrapper">
         <div class="flip-card">
           <div class="flip-inner">
             <div class="flip-front">
-              <img
-                src="images/illus/tenn.png"
-                alt="Sport Illustration Tennis"
-              />
+              <img src="images/illus/tenn.png" alt="Sport Illustration Tennis" />
             </div>
             <div class="flip-back">
-              <img
-                src="images/illus/tenn.png"
-                alt="Sport Illustration Tennis (back)"
-              />
+              <img src="images/illus/tenn.png" alt="Sport Illustration Tennis (back)" />
             </div>
           </div>
         </div>
       </div>
     </section>
+    
 
     <section class="intro-row">
       <div class="heading-wrapper">
@@ -886,7 +861,7 @@
           Wann: 3. Dezember 2025, 17:30 Uhr<br />
           <strong>Wo?</strong><br />
           MS Reichenau, Burghard-Breitner-Straße 22<br />
-          6020 Innsbruck<br />
+           6020 Innsbruck<br />
         </div>
       </div>
     </section>
@@ -896,7 +871,7 @@
         <div class="tilted-bg bg-angebot" id="angebot-toggle-1">
           <h1>Unser Angebot?</h1>
         </div>
-
+    
         <!-- 👇 Hidden by default -->
         <div id="angebot-content-1" class="angebot-cards fade-in-once">
           <div>Verschränkte Ganztagesklasse</div>
@@ -904,8 +879,8 @@
           <div>Moderne Infrastruktur & Sportanlagen</div>
           <div>Sportspezifische & multisportive Ausbildung</div>
           <div>
-            Abstimmung mit Schule und Vereinen bei Turnieren, Auswärtsfahrten
-            und sportlichen Veranstaltungen
+            Abstimmung mit Schule und Vereinen bei Turnieren,
+            Auswärtsfahrten und sportlichen Veranstaltungen
           </div>
         </div>
       </div>
@@ -916,28 +891,22 @@
         <div class="tilted-bg clickable bg-ganztags" id="angebot-toggle-2">
           <h1>Ganztagesklasse?</h1>
         </div>
-
+    
         <!-- Hidden by default -->
         <div id="angebot-content-2" class="angebot-cards fade-in-once">
-          <div>
-            Die Schüler:innen werden von Montag bis Donnerstag bis 16 Uhr, an
-            Freitagen bis 14 Uhr, von Pädagog:innen in der Schule betreut. Somit
-            bleibt mehr Zeit für das individuelle Training im Stammverein und
-            Auswahlteam.
-          </div>
-          <div>
-            Die verschränkte Ganztagesklasse bietet einen rhythmisierten
-            Tagesablauf mit abwechselnden Lern-, Sport- und Freizeiteinheiten.
-            Hausaufgaben werden während der Schulzeit bearbeitet.
-          </div>
-          <div>
-            Die Kosten für den Mittagstisch an der Schule betragen pro
-            konsumierter Mahlzeit € 5,10.
-          </div>
-          <div>
-            Für die ganztägige Betreuung fällt ein Betrag von € 35,- pro Monat
-            an.
-          </div>
+          <div>Die Schüler:innen werden von Montag bis
+            Donnerstag bis 16 Uhr, an Freitagen bis 14 Uhr,
+            von Pädagog:innen in der Schule betreut. Somit
+            bleibt mehr Zeit für das individuelle Training im
+            Stammverein und Auswahlteam.</div>
+          <div>Die verschränkte Ganztagesklasse bietet einen
+            rhythmisierten Tagesablauf mit abwechselnden
+            Lern-, Sport- und Freizeiteinheiten. Hausaufgaben
+            werden während der Schulzeit bearbeitet.</div>
+          <div>Die Kosten für den Mittagstisch an der Schule
+            betragen pro konsumierter Mahlzeit € 5,10.</div>
+          <div>Für die ganztägige Betreuung fällt ein Betrag
+            von € 35,- pro Monat an.</div>
         </div>
       </div>
     </section>
@@ -947,13 +916,10 @@
         <div class="tilted-bg clickable bg-wichtig" id="angebot-toggle-3">
           <h1>Was ist uns wichtig?</h1>
         </div>
-
+    
         <!-- Hidden by default -->
         <div id="angebot-content-3" class="angebot-cards fade-in-once">
-          <div>
-            Intensive Zusammenarbeit zwischen der Schule, den Trainer:innen im
-            Verein/Verband und den Eltern.
-          </div>
+          <div>Intensive Zusammenarbeit zwischen der Schule, den Trainer:innen im Verein/Verband und den Eltern.</div>
           <div>Vermittlung sporttheoretischer Inhalte im Unterricht.</div>
           <div>Sportwissenschaftliche Begleitung.</div>
           <div>Trainingsdokumentation.</div>
@@ -966,37 +932,34 @@
         <div class="tilted-bg clickable bg-aufnahme" id="angebot-toggle-4">
           <h1>Aufnahme?</h1>
         </div>
-
-        <div
-          id="aufnahme-text"
-          class="hidden fade-in-once"
-          style="
-            max-width: 900px;
-            margin: 0.8rem auto; /* reduced vertical space */
-            text-align: center;
-            line-height: 1.5;
-            font-size: 1.25rem; /* about 2 sizes larger */
-          "
-        >
-          <p style="margin: 0.5em 0">
-            Die Ballsport Akademie wird an der Mittelschule Reichenau geführt.
+    
+        <div id="aufnahme-text" 
+            class="hidden fade-in-once" 
+            style="
+              max-width: 900px; 
+              margin: 0.8rem auto;     /* reduced vertical space */
+              text-align: center; 
+              line-height: 1.5;
+              font-size: 1.25rem;      /* about 2 sizes larger */
+            ">
+          <p style="margin: 0.5em 0;">
+            Die Ballsport Akademie wird an der Mittelschule Reichenau geführt. 
             Sie steht allen Schüler:innen aus Tirol offen!
           </p>
           <strong>Aufnahmekriterien:</strong>
         </div>
-
+    
         <!--  Hidden by default -->
         <div id="angebot-content-4" class="angebot-cards fade-in-once">
-          <div>
-            Sportartspezifischer sportmotorischer Test in Fußball, Tennis und
-            Volleyball (durch unabhängige Verbandstrainer:innen)
-          </div>
+          <div>Sportartspezifischer sportmotorischer Test in Fußball, Tennis und Volleyball (durch unabhängige Verbandstrainer:innen)</div>
           <div>Aufnahmegespräch mit Eltern und Schüler:in</div>
           <div>Sportärztliche Untersuchung</div>
           <div>Empfehlung vom Stammverein oder Verband</div>
         </div>
       </div>
     </section>
+    
+    
 
     <section class="contact fade-in">
       <div class="tilted-bg">
@@ -1076,16 +1039,6 @@
 
     <script>
       const elements = document.querySelectorAll(".fade-in");
-
-      // Add before your IntersectionObserver code
-      document.documentElement.classList.add("preload");
-      window.addEventListener("load", () => {
-        // next frame, enable transitions
-        requestAnimationFrame(() =>
-          document.documentElement.classList.remove("preload")
-        );
-      });
-
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -1109,11 +1062,9 @@
           const isVisible = content.classList.contains("visible");
 
           // Hide all other sections first
-          document
-            .querySelectorAll(".angebot-cards, #aufnahme-text")
-            .forEach((el) => {
-              el.classList.remove("visible");
-            });
+          document.querySelectorAll(".angebot-cards, #aufnahme-text").forEach((el) => {
+            el.classList.remove("visible");
+          });
 
           // Toggle this one
           if (!isVisible) {
@@ -1126,11 +1077,15 @@
         });
       });
 
-      document.querySelectorAll(".illus-wrapper").forEach((wrapper) => {
-        wrapper.addEventListener("click", () => {
-          wrapper.querySelector(".flip-card").classList.toggle("flipped");
+
+      document.querySelectorAll('.illus-wrapper').forEach(wrapper => {
+        wrapper.addEventListener('click', () => {
+          wrapper.querySelector('.flip-card').classList.toggle('flipped');
         });
       });
+
+
+
     </script>
   </body>
 </html>
