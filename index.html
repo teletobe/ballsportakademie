@@ -786,6 +786,28 @@
         padding: 0 0.5rem; /* adds breathing space on both sides */
         box-sizing: border-box;
       }
+
+      /* Center text inside Wichtige Termine cards */
+      #termine-content div {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center; /* vertical center */
+        align-items: center; /* horizontal center */
+        text-align: center;
+        white-space: normal !important;
+        column-count: 1 !important;
+      }
+
+      /* Second line normal weight */
+      #termine-content div span {
+        font-weight: normal;
+      }
+
+      #termine-content div span {
+        font-weight: normal;
+        min-height: 1.2em; /* reserve vertical space even when empty */
+        display: block;
+      }
     </style>
   </head>
   <body>
@@ -887,11 +909,50 @@
 
       <section class="intro-row">
         <div class="heading-wrapper">
+          <div class="tilted-bg bg-wichtig">
+            <h1>Wichtige Termine:</h1>
+          </div>
+
+          <div id="termine-content" class="angebot-cards visible fade-in-once">
+            <div>
+              <strong>Tag der offenen Tür an der MS Reichenau:</strong>
+              <span>Freitag, 23.01.2026, 14:30 – 16:30 Uhr</span>
+            </div>
+
+            <div>
+              <strong
+                >Anmeldung zu Aufnahmetests mit Empfehlung
+                Verband/Verein:</strong
+              >
+              <span>bis Montag, 26. Jänner 2026</span>
+            </div>
+
+            <div>
+              <strong
+                >Sportmotorische und Sportartspezifische
+                Eignungsprüfung:</strong
+              >
+              <span>Mittwoch, 28.01.2026, 14:30 – 17:00 Uhr</span>
+            </div>
+
+            <div>
+              <strong
+                >Eine Anmeldung durch die Eltern erfolgt in der Woche nach den
+                Semesterferien. <br
+              /></strong>
+              <span>(ab 16. Februar 2026)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro-row">
+        <div class="heading-wrapper">
           <div class="tilted-bg bg-angebot" id="angebot-toggle-1">
             <h1>Unser Angebot?</h1>
           </div>
 
-          <!-- 👇 Hidden by default -->
+          <!-- Hidden by default -->
           <div id="angebot-content-1" class="angebot-cards fade-in-once">
             <div>Verschränkte Ganztagesklasse</div>
             <div>Offener & projektorientierter Unterricht</div>
