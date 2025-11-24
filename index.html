@@ -1159,7 +1159,9 @@
 
           // Hide all other sections first
           document
-            .querySelectorAll(".angebot-cards, #aufnahme-text")
+            .querySelectorAll(
+              ".angebot-cards:not(#termine-content), #aufnahme-text"
+            )
             .forEach((el) => {
               el.classList.remove("visible");
             });
