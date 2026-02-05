@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -127,7 +127,9 @@
         height: 250px;
         border-radius: 50%;
         border: 0px solid var(--turquoise);
-        transition: transform 0.3s ease, box-shadow 0.3s ease,
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease,
           border-color 0.3s ease;
       }
 
@@ -196,7 +198,10 @@
         max-height: 100px;
         object-fit: contain;
         filter: grayscale(20%);
-        transition: transform 0.3s ease, filter 0.3s ease, border 0.3s ease;
+        transition:
+          transform 0.3s ease,
+          filter 0.3s ease,
+          border 0.3s ease;
         border-radius: 6px;
       }
 
@@ -636,7 +641,9 @@
         border-radius: 50%; /* always circular */
         overflow: hidden; /* prevents square-to-circle flash */
         transform-style: preserve-3d;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
         will-change: transform;
@@ -744,7 +751,10 @@
         margin-top: 0;
         margin-bottom: 0;
         overflow: hidden;
-        transition: opacity 0.5s ease, transform 0.5s ease, max-height 0.6s ease,
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease,
+          max-height 0.6s ease,
           margin 0.4s ease;
         pointer-events: none;
       }
@@ -852,9 +862,9 @@
           <div class="tilted-bg bg-anmeldung" id="angebot-toggle-1">
             <h1>
               <a
-                href="https://ms-reichenau.tsn.at/ballsport-akademie/anmeldung-ballsport-akademie"
+                href="https://fantastical.app/Uwe-Zanolin/anmeldung"
                 target="_blank"
-                >Anmeldung Aufnahmetests</a
+                >Buchung für den Anmeldetermin</a
               >
             </h1>
           </div>
@@ -925,28 +935,7 @@
           </div>
 
           <div id="termine-content" class="angebot-cards visible fade-in-once">
-            <div>
-              <strong>Tag der offenen Tür an der MS Reichenau:</strong>
-              <span>Freitag, 23.01.2026, 14:30 – 16:30 Uhr</span>
-            </div>
-
-            <div>
-              <strong
-                >Anmeldung zu Aufnahmetests mit Empfehlung
-                Verband/Verein:</strong
-              >
-              <span>bis Montag, 26. Jänner 2026</span>
-            </div>
-
-            <div>
-              <strong
-                >Sportmotorische und Sportartspezifische
-                Eignungsprüfung:</strong
-              >
-              <span>Mittwoch, 28.01.2026, 14:30 – 17:00 Uhr</span>
-            </div>
-
-            <div>
+            <div style="grid-column: 1 / -1">
               <strong
                 >Eine Anmeldung durch die Eltern erfolgt in der Woche nach den
                 Semesterferien. <br
@@ -1027,6 +1016,7 @@
         </div>
       </section>
 
+      <!---
       <section class="intro-row">
         <div class="heading-wrapper">
           <div class="tilted-bg clickable bg-aufnahme" id="angebot-toggle-4">
@@ -1051,7 +1041,6 @@
             <strong>Aufnahmekriterien:</strong>
           </div>
 
-          <!--  Hidden by default -->
           <div id="angebot-content-4" class="angebot-cards fade-in-once">
             <div>
               Sportartspezifischer sportmotorischer Test in Fußball, Tennis und
@@ -1063,6 +1052,7 @@
           </div>
         </div>
       </section>
+      -->
 
       <section class="contact fade-in">
         <div class="tilted-bg">
@@ -1142,7 +1132,7 @@
             <img src="images/sponsor6.png" alt="Volleyball Verband Logo" />
           </a>
         </div>
-        <p>© 2025 Ballsport Akademie. Alle Rechte vorbehalten.</p>
+        <p>© 2026 Ballsport Akademie. Alle Rechte vorbehalten.</p>
       </footer>
     </div>
     <script>
@@ -1155,7 +1145,7 @@
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
       elements.forEach((el) => observer.observe(el));
 
@@ -1172,7 +1162,7 @@
           // Hide all other sections first
           document
             .querySelectorAll(
-              ".angebot-cards:not(#termine-content), #aufnahme-text"
+              ".angebot-cards:not(#termine-content), #aufnahme-text",
             )
             .forEach((el) => {
               el.classList.remove("visible");
