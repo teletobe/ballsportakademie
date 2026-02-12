@@ -1,0 +1,164 @@
+/* Sport illustration image row, flip-card 3D animation, and per-image position adjustments */
+
+.image-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 3rem 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.image-row.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.image-row img {
+  object-fit: contain;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 0px solid var(--turquoise);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* === Flip animation for illus-wrapper === */
+.illus-wrapper {
+  display: inline-block;
+  perspective: 1000px;
+  cursor: pointer;
+  border-radius: 50%; /* always circular */
+  overflow: hidden; /* prevents square-to-circle flash */
+  transform-style: preserve-3d;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Hover lift + shadow (remains circular) */
+.illus-wrapper:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* The flipping card inside */
+.flip-card {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Inner rotation container */
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+  position: relative;
+  border-radius: 50%;
+  transform-origin: center;
+}
+
+/* Front and back sides */
+.flip-front,
+.flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* Safari fix */
+}
+
+/* Back side rotated */
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Flipped state */
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+  will-change: transform;
+}
+
+.flip-front img,
+.flip-back img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* === Image alignment container === */
+.img-adjust {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+}
+
+/* The image itself */
+.img-adjust img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%; /* small zoom to allow offset */
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+/* === Per-image fine-tuning === */
+.image-row .illus-wrapper:nth-child(1) .img-adjust img {
+  transform: translate(calc(-50% + 10px), -50%); /* move right */
+}
+
+.image-row .illus-wrapper:nth-child(2) .img-adjust img {
+  transform: translate(calc(-50% - 4px), -50%); /* move left */
+}
+
+.image-row .illus-wrapper:nth-child(3) .img-adjust img {
+  transform: translate(-50%, -50%); /* centered */
+}
+
+/* Make image-row images smaller on mobile */
+@media (max-width: 750px) {
+  .image-row img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .flip-card {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* Optional: even smaller for very narrow screens */
+@media (max-width: 480px) {
+  .image-row img {
+    width: 120px;
+    height: 120px;
+  }
+}

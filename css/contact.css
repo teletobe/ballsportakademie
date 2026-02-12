@@ -1,0 +1,66 @@
+/* Contact section with school info, coordinator details, and Mittelschule logo */
+
+.contact {
+  text-align: center;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.contact.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact h2 {
+  font-size: 1.6rem;
+  margin: 2rem 0 1rem;
+  color: var(--dark-blue);
+}
+
+.contact .person {
+  margin-bottom: 1.5rem;
+}
+
+.contact .tilted-bg::before {
+  transform: translate(-50%, -15%) rotate(0.9deg); /* positive angle instead of negative */
+  width: 120%;
+  height: 2.4em;
+  background-color: #4bb9dd;
+  z-index: -2;
+  border-radius: 0;
+}
+
+.contact .tilted-bg::after {
+  transform: translate(-44%, -40%) rotate(0.7deg); /* second rectangle slightly tilted too */
+  width: 122%;
+  height: 2.8em;
+  background-color: #addbe9;
+  z-index: -3;
+  border-radius: 0;
+}
+
+.kontakt-logo {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.kontakt-logo img {
+  width: 200px; /* or whatever size looks good */
+  height: auto;
+  border-radius: 150px; /* optional */
+}
+
+.kontakt-logo img:hover {
+  transform: translateY(-3px);
+  filter: grayscale(0%);
+  border: 2px solid var(--turquoise);
+}
+
+@media (max-width: 720px) {
+  .contact .tilted-bg {
+    margin-top: 1em;
+  }
+}

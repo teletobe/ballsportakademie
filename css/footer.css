@@ -1,0 +1,65 @@
+/* Footer with sponsor logos and copyright notice */
+
+footer {
+  background-color: #ffffff;
+  padding: 4rem 1rem;
+  text-align: center;
+  border-top: 5px solid var(--bright-green);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+footer.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sponsors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.sponsors img {
+  max-height: 100px;
+  object-fit: contain;
+  filter: grayscale(20%);
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease,
+    border 0.3s ease;
+  border-radius: 6px;
+}
+
+.sponsors img:hover {
+  transform: translateY(-3px);
+  filter: grayscale(0%);
+  border: 2px solid var(--turquoise);
+}
+
+.sponsors img:first-of-type {
+  max-height: 80px;
+}
+
+footer p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+@media (max-width: 1080px) {
+  .sponsors {
+    flex-wrap: wrap;
+  }
+
+  .sponsors a:first-child,
+  .sponsors a:last-child {
+    flex-basis: 100%; /* forces first and last to take full width */
+    display: flex;
+    justify-content: center; /* centers the logos */
+  }
+}

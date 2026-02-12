@@ -1,0 +1,65 @@
+/* Header banner with striped green gradient background and logo */
+
+.multi-header {
+  position: relative;
+  text-align: center;
+  color: #ffffff;
+  padding: 1.5rem 1rem 2.5rem; /*  less top and bottom padding */
+  overflow: hidden;
+  z-index: 1;
+}
+
+.multi-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    -12deg,
+    #1d7d3e 0%,
+    #1d7d3e 10%,
+    #3c9e45 10%,
+    #3c9e45 30%,
+    #1d7d3e 30%,
+    #1d7d3e 50%,
+    #3c9e45 50%,
+    #3c9e45 70%,
+    #1d7d3e 70%,
+    #1d7d3e 85%,
+    #3c9e45 85%,
+    #3c9e45 70%
+  );
+  z-index: -4;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 95%
+  ); /*  slightly shallower angle */
+}
+
+.multi-header img {
+  max-width: 200px;
+  height: auto;
+  margin-top: 2rem; /* pushes it lower */
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.multi-header h1 {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+
+.multi-header .coming-soon {
+  font-size: 1.2rem;
+  color: var(--bright-green);
+  margin-bottom: 0;
+}
+
+header img {
+  max-width: 160px;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}

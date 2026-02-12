@@ -1,0 +1,52 @@
+/* Global variables, body reset, typography, links, and utility classes */
+
+:root {
+  --bright-green: #3c9e45;
+  --dark-green: #1d7d3e;
+  --turquoise: #6fbdba;
+  --dark-blue: #003e6b;
+  --light-bg: #f9fbfc;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  background-color: #ffffff;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+
+.coming-soon {
+  font-size: 1.2rem;
+  color: var(--dark-green);
+  margin-bottom: 0;
+}
+
+a {
+  color: #0696c7;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--dark-blue);
+  text-decoration: underline;
+}
+
+.wrapper {
+  overflow-x: clip;
+  position: relative;
+}
+
+.hidden {
+  display: none !important;
+}

@@ -1,0 +1,192 @@
+/* Intro rows, heading wrappers, tilted-bg decorations and their per-section color variants */
+
+.intro-row {
+  text-align: center;
+  line-height: 1.6;
+}
+
+.heading-wrapper {
+  display: flex;
+  flex-direction: column; /* stack h1 and strong vertically */
+  align-items: center; /* center text */
+  gap: 1rem; /* spacing between elements */
+}
+
+.tilted-bg {
+  display: inline-block;
+  position: relative;
+}
+
+/* First rectangle (dark turquoise, -3deg) */
+.tilted-bg::before {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-51%, -51%) rotate(-0.6deg);
+  width: 105%;
+  height: 2.8em;
+  background-color: #4bb9dd; /* dark turquoise */
+  z-index: -2; /* behind text but above second rectangle */
+}
+
+/* Second rectangle (slightly lighter, 2deg) */
+.tilted-bg::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-0.8deg);
+  width: 106%;
+  height: 3.4em;
+  background-color: #addbe9; /* slightly lighter green/turquoise */
+  z-index: -3; /* behind the first rectangle */
+}
+
+.tilted-bg h1,
+.tilted-bg h2 {
+  color: #003e6b; /* dark blue */
+}
+
+.tilted-bg h1 {
+  padding: 0 0.5rem; /* adds breathing space on both sides */
+  box-sizing: border-box;
+}
+
+.baelle-logo {
+  width: 150px;
+}
+
+.intro-text {
+  max-width: 750px; /* limits the width on large screens */
+  margin: 0 auto; /* centers it horizontally */
+  text-align: center; /* keeps lines centered */
+  line-height: 1.6; /* keeps it readable */
+  font-size: 1.05rem;
+}
+
+#aufnahme-text {
+  max-width: 900px;
+  margin: 0.8rem auto;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 1.25rem;
+}
+#aufnahme-text p {
+  margin: 0.5em 0;
+}
+
+/* Add spacing between consecutive intro sections */
+.intro-row + .intro-row {
+  margin-top: 2em;
+}
+
+/* Kick-Off */
+.bg-kickoff::before {
+  background-color: #4bb9dd;
+  transform: translate(-50%, -50%) rotate(1deg);
+}
+.bg-kickoff::after {
+  background-color: #addbe9;
+  transform: translate(-48%, -48%) rotate(1deg);
+}
+
+/* Unser Angebot */
+.bg-angebot::before {
+  background-color: #4bb9dd;
+  transform: translate(-50%, -50%) rotate(-1deg);
+}
+.bg-angebot::after {
+  background-color: #addbe9;
+  transform: translate(-48%, -48%) rotate(-1deg);
+}
+
+/* Ganztagesklasse */
+.bg-ganztags::before {
+  background-color: #4bb9dd;
+  transform: translate(-52%, -52%) rotate(1deg);
+}
+.bg-ganztags::after {
+  background-color: #addbe9;
+  transform: translate(-52%, -52%) rotate(1.1deg);
+}
+
+/* Was ist uns wichtig */
+.bg-wichtig::before {
+  background-color: #4bb9dd;
+  transform: translate(-50%, -50%) rotate(-1deg);
+}
+.bg-wichtig::after {
+  background-color: #addbe9;
+  transform: translate(-48%, -48%) rotate(-1deg);
+}
+
+/* Aufnahme */
+.bg-aufnahme::before {
+  background-color: #4bb9dd;
+  transform: translate(-52%, -52%) rotate(1deg);
+}
+.bg-aufnahme::after {
+  background-color: #addbe9;
+  transform: translate(-52%, -52%) rotate(1.1deg);
+}
+
+/* Anmeldung */
+.bg-anmeldung::before {
+  background-color: #1d7d3e;
+  transform: translate(-49%, -55%) rotate(0.5deg);
+}
+.bg-anmeldung::after {
+  background-color: #3c9e45;
+  transform: translate(-47%, -50%) rotate(0.5deg);
+}
+.bg-anmeldung a {
+  color: #eaeaea;
+}
+
+@media (max-width: 510px) {
+  .tilted-bg::before {
+    content: "";
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-51%, -51%) rotate(-0.6deg);
+    width: 105%;
+    height: 5.5em;
+    background-color: #4bb9dd; /* dark turquoise */
+    z-index: -2; /* behind text but above second rectangle */
+  }
+  .tilted-bg::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-0.8deg);
+    width: 106%;
+    height: 6.7em;
+    background-color: #addbe9; /* slightly lighter green/turquoise */
+    z-index: -3; /* behind the first rectangle */
+  }
+  .intro-lead {
+    display: block;
+    margin-top: 1rem;
+    width: 75%;
+  }
+  .einlad-lead {
+    display: block;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .intro-text {
+    max-width: 90%; /* takes up less space on smaller screens */
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Add spacing between consecutive intro sections */
+  .intro-row + .intro-row {
+    margin-top: 4em;
+  }
+}

@@ -1,0 +1,162 @@
+/* Angebot card grids, toggle accordion behaviour, termine content, and card animations */
+
+[id^="angebot-toggle"] {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  filter: brightness(1.05);
+}
+
+[id^="angebot-toggle"]:hover {
+  transform: scale(1.03);
+  filter: brightness(1.12);
+}
+
+.fade-in-once {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.fade-in-once.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.angebot-cards {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 column on mobile */
+  gap: 1rem;
+  max-width: 900px;
+  margin: 2rem auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease;
+}
+
+.angebot-cards.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.angebot-cards div {
+  background: var(--turquoise);
+  color: #ffffff;
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+
+  /* vertical centering */
+  display: flex;
+  align-items: center; /* centers text vertically */
+  justify-content: center; /* centers text horizontally */
+  text-align: center;
+}
+
+/* Custom alternating background for Angebot cards */
+.angebot-cards div:nth-child(1),
+.angebot-cards div:nth-child(4) {
+  background: var(--bright-green);
+}
+
+.angebot-cards div:nth-child(2),
+.angebot-cards div:nth-child(3),
+.angebot-cards div:nth-child(5) {
+  background: var(--dark-green);
+}
+
+/* Collapse/expand transition for cards and aufnahme text */
+.angebot-cards,
+#aufnahme-text {
+  opacity: 0;
+  transform: translateY(10px);
+  max-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    max-height 0.6s ease,
+    margin 0.4s ease;
+  pointer-events: none;
+}
+
+.angebot-cards.visible,
+#aufnahme-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 1500px; /* enough to show full content */
+  margin-top: 1.5rem; /* normal spacing when open */
+  margin-bottom: 1.5rem;
+  pointer-events: auto;
+}
+
+/* optional: small stagger effect for cards */
+.angebot-cards.visible div {
+  animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Center text inside Wichtige Termine cards */
+#termine-content div {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center; /* horizontal center */
+  text-align: center;
+  white-space: normal !important;
+  column-count: 1 !important;
+}
+
+/* Second line normal weight */
+#termine-content div span {
+  font-weight: normal;
+  min-height: 1.2em; /* reserve vertical space even when empty */
+  display: block;
+}
+
+@media (min-width: 720px) {
+  .angebot-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Only make last card full width for the 5-item section */
+  #angebot-content-1 div:last-child {
+    grid-column: span 2;
+  }
+}
+
+/* Mobile styling for Angebot cards */
+@media (max-width: 720px) {
+  .angebot-cards {
+    grid-template-columns: 1fr; /* Single column layout */
+    padding: 0 1rem; /* Adds spacing on the left and right */
+  }
+
+  .angebot-cards div {
+    font-size: 1rem; /* Slightly smaller text */
+    margin: 0.5rem 0; /* Adds space between the cards */
+  }
+
+  /* Override colors for mobile view */
+  .angebot-cards div:nth-child(odd) {
+    background: var(--bright-green);
+  }
+
+  .angebot-cards div:nth-child(even) {
+    background: var(--dark-green);
+  }
+}
