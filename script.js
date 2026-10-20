@@ -1,4 +1,4 @@
-// Ballsport Akademie – scroll reveal, accordion (one open at a time), news toggle, flip cards, topbar state
+// Ballsport Akademie – scroll reveal, accordion (one open at a time), news toggle, sport spin, topbar state
 
 const reveals = document.querySelectorAll(".reveal");
 const revealObserver = new IntersectionObserver(
@@ -55,7 +55,12 @@ if (newsList && newsToggle) {
 }
 
 document.querySelectorAll(".sport").forEach((card) => {
-  card.addEventListener("click", () => card.classList.toggle("flipped"));
+  const spin = card.querySelector(".spin");
+  let turns = 0;
+  card.addEventListener("click", () => {
+    turns += 1;
+    spin.style.setProperty("--turn", `${turns * 360}deg`);
+  });
 });
 
 const topbar = document.getElementById("topbar");
