@@ -91,6 +91,16 @@
   transform: translate(-48%, -48%) rotate(1deg);
 }
 
+/* Aktuelles */
+.bg-aktuelles::before {
+  background-color: #4bb9dd;
+  transform: translate(-51%, -50%) rotate(-1.2deg);
+}
+.bg-aktuelles::after {
+  background-color: #addbe9;
+  transform: translate(-49%, -48%) rotate(-0.8deg);
+}
+
 /* Unser Angebot */
 .bg-angebot::before {
   background-color: #4bb9dd;

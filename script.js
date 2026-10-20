@@ -1,50 +1,64 @@
-// Ballsport Akademie – scroll-based fade-in animations, accordion toggles for Angebot sections, and flip-card interactions
+// Ballsport Akademie – scroll reveal, accordion (one open at a time), news toggle, flip cards, topbar state
 
-const elements = document.querySelectorAll(".fade-in");
-const observer = new IntersectionObserver(
+const reveals = document.querySelectorAll(".reveal");
+const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
       }
     });
   },
-  { threshold: 0.1 },
+  { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
 );
-elements.forEach((el) => observer.observe(el));
+reveals.forEach((el) => revealObserver.observe(el));
 
-const toggles = document.querySelectorAll('[id^="angebot-toggle"]');
+// Accordion: like the original page, opening one section closes the others
+const triggers = document.querySelectorAll(".acc-trigger");
 
-toggles.forEach((toggle) => {
-  const num = toggle.id.split("-").pop();
-  const content = document.getElementById(`angebot-content-${num}`);
-  const extraText = document.getElementById("aufnahme-text");
+triggers.forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    const isOpen = trigger.getAttribute("aria-expanded") === "true";
 
-  toggle.addEventListener("click", () => {
-    const isVisible = content.classList.contains("visible");
+    triggers.forEach((other) => {
+      other.setAttribute("aria-expanded", "false");
+      document
+        .getElementById(other.getAttribute("aria-controls"))
+        .classList.remove("open");
+    });
 
-    // Hide all other sections first
-    document
-      .querySelectorAll(
-        ".angebot-cards:not(#termine-content), #aufnahme-text",
-      )
-      .forEach((el) => {
-        el.classList.remove("visible");
-      });
-
-    // Toggle this one
-    if (!isVisible) {
-      content.classList.add("visible");
-      if (num === "4" && extraText) extraText.classList.add("visible");
-    } else {
-      content.classList.remove("visible");
-      if (num === "4" && extraText) extraText.classList.remove("visible");
+    if (!isOpen) {
+      trigger.setAttribute("aria-expanded", "true");
+      document
+        .getElementById(trigger.getAttribute("aria-controls"))
+        .classList.add("open");
     }
   });
 });
 
-document.querySelectorAll(".illus-wrapper").forEach((wrapper) => {
-  wrapper.addEventListener("click", () => {
-    wrapper.querySelector(".flip-card").classList.toggle("flipped");
+const newsList = document.getElementById("news-list");
+const newsToggle = document.getElementById("news-toggle");
+
+if (newsList && newsToggle) {
+  // Hide the button when there is nothing beyond the first two
+  if (newsList.children.length <= 2) newsToggle.hidden = true;
+
+  newsToggle.addEventListener("click", () => {
+    const expanded = newsList.classList.toggle("expanded");
+    newsToggle.setAttribute("aria-expanded", String(expanded));
+    newsToggle.textContent = expanded
+      ? "Weniger anzeigen"
+      : "Alle Meldungen anzeigen";
+    if (!expanded) newsList.scrollIntoView({ block: "start" });
   });
+}
+
+document.querySelectorAll(".sport").forEach((card) => {
+  card.addEventListener("click", () => card.classList.toggle("flipped"));
 });
+
+const topbar = document.getElementById("topbar");
+const onScroll = () => topbar.classList.toggle("scrolled", window.scrollY > 8);
+onScroll();
+window.addEventListener("scroll", onScroll, { passive: true });

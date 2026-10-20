@@ -134,7 +134,8 @@
   }
 
   /* Only make last card full width for the 5-item section */
-  #angebot-content-1 div:last-child {
+  #angebot-content-1 div:last-child,
+  #termine-content div:last-child {
     grid-column: span 2;
   }
 }
