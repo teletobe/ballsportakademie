@@ -110,88 +110,13 @@
             <h2>Aktuelles</h2>
           </div>
 
-          <!-- Neue Meldungen ganz oben einfügen; die ersten zwei sind immer sichtbar -->
-          <div id="news-list" class="news-list">
-            <article class="news-item reveal">
-              <img
-                src="images/photos/buergermeister.jpeg"
-                alt="Bürgermeister Johannes Anzengruber mit Volleyball-Schülerinnen der Ballsport Akademie"
-                width="806"
-                height="638"
-                loading="lazy"
-              />
-              <div class="news-body">
-                <h3>Bürgermeister Anzengruber besucht Ballsport Akademie</h3>
-                <p>
-                  Mitte Oktober 2026 besuchte der Innsbrucker Bürgermeister und
-                  einer der treibenden Kräfte hinter der Ballsport Akademie,
-                  Johannes Anzengruber, die Schülerinnen an der Mittelschule
-                  Reichenau. Als Zaungast beim Volleyball-Training war
-                  Anzengruber vom Einsatz der Athletinnen restlos begeistert.
-                </p>
-              </div>
-            </article>
-            <article class="news-item reveal">
-              <img
-                src="images/photos/orientierungslauf.jpeg"
-                alt="Schüler:innen der Ballsport Akademie bei den Tiroler Schulmeisterschaften im Orientierungslauf"
-                width="1200"
-                height="959"
-                loading="lazy"
-              />
-              <div class="news-body">
-                <h3>Ballsport-Athleten beim Orientierungslauf</h3>
-                <p>
-                  Im Rahmen ihrer multisportiven Ausbildung hatten einige
-                  Schüler:innen der Ballsport Akademie im Oktober 2026 die
-                  Gelegenheit, an den Tiroler Schulmeisterschaften im
-                  Orientierungslauf teilzunehmen.
-                </p>
-              </div>
-            </article>
-            <article class="news-item">
-              <img
-                src="images/photos/sportkoordinatoren.jpeg"
-                alt="Gruppenfoto der Sport-Koordinator:innen an der MS Reichenau"
-                width="1535"
-                height="675"
-                loading="lazy"
-              />
-              <div class="news-body">
-                <h3>Sportkoordinatoren treffen sich an Ballsport Akademie</h3>
-                <p>
-                  Beim alljährlichen Treffen der Sport-Koordinator:innen der
-                  Innsbrucker Volks- und Mittelschulen konnten sich die Gäste an
-                  der MS Reichenau genau über die Ballsport Akademie
-                  informieren. Nach den Grußworten von Bürgermeister und
-                  Sportreferent Johannes Anzengruber berichtete Esmeralda
-                  Mildner über Neuigkeiten aus dem Nachwuchskompetenzzentrum
-                  Tirol. Anschließend nutzten die Teilnehmer:innen die
-                  Möglichkeit zum Austausch und Netzwerken bei einem Umtrunk
-                  und Snacks.
-                </p>
-              </div>
-            </article>
-            <article class="news-item">
-              <img
-                src="images/photos/schuelerliga.jpeg"
-                alt="Fußballer der MS Reichenau beim Schülerliga-Turnier"
-                width="951"
-                height="470"
-                loading="lazy"
-              />
-              <div class="news-body">
-                <h3>BA-Fußballer im Schülerliga-Einsatz</h3>
-                <p>
-                  Beim Fußball-Schülerliga-Turnier Anfang Oktober an der
-                  Innsbrucker Wiesengasse feierten die Spieler der Ballsport
-                  Akademie ihren ersten Auftritt im Team der MS Reichenau. Bei
-                  diesem Vorbereitungsturnier nutzten alle Teams die
-                  Möglichkeit, die neuen Spieler ins Team zu integrieren, um
-                  für die Meisterschaft bereit zu sein.
-                </p>
-              </div>
-            </article>
+          <!-- Meldungen kommen aus news.js – dort neue Meldungen ganz oben einfügen -->
+          <div id="news-list" class="news-list"></div>
+
+          <!-- Vorschau auf die nächsten Meldungen, wird aus news.js befüllt -->
+          <div id="news-teasers" class="news-teasers" hidden>
+            <h3 class="news-teasers-label">Weitere Meldungen</h3>
+            <div class="teaser-grid"></div>
           </div>
 
           <div class="news-more">
@@ -503,6 +428,7 @@
       </div>
     </footer>
 
+    <script src="news.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
