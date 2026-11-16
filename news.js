@@ -9,12 +9,31 @@
 // - image:    Foto (optional), am besten in images/photos/ ablegen
 // - images:   statt "image" für mehrere Fotos – sie wechseln automatisch,
 //             antippen zeigt das nächste: images: ["…/a.jpeg", "…/b.jpeg"],
+//             Videos (.mp4) gehen auch – sie laufen stumm bis zum Ende;
+//             als erstes Element aber immer ein Foto (Vorschaubild)
 // - imageAlt: kurze Bildbeschreibung (für Screenreader und falls das Bild nicht lädt)
 //
 // Text zwischen ` ` (Backticks) darf über mehrere Zeilen gehen.
 // Nach jedem Block } ein Komma setzen.
 
 window.NEWS = [
+  {
+    title: "Training an der Schule läuft!",
+    images: [
+      "images/photos/volleyball1.jpeg",
+      "images/photos/run.jpeg",
+      "images/photos/tennis.mp4",
+    ],
+    imageAlt:
+      "Schüler:innen der Ballsport Akademie beim Volleyball-, Fußball- und Tennistraining an der MS Reichenau",
+    text: `Restlos begeistert sind die Trainer und Schüler:innen der Ballsport
+Akademie von den sportartspezifischen Unterrichtseinheiten an der Mittelschule
+Reichenau. Egal ob beim Tennis mit Trainer Mischa Shumskyi, Volleyball mit
+Rogelio Hernandez oder Fußball mit Ahmet Duran – in allen Hallen wird eifrig
+geübt und an den Techniken gearbeitet. Die in Zusammenarbeit mit den
+Spezialverbänden angebotenen Trainings an der Schule sind – neben der
+Ganztagesklasse – eines der Markenzeichen der Ballsport Akademie.`,
+  },
   {
     title: "Ballsport Akademie taucht ab",
     images: ["images/photos/swim1.jpeg", "images/photos/swim2.jpeg"],

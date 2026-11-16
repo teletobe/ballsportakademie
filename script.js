@@ -11,22 +11,60 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const newsImages = (entry) =>
   Array.isArray(entry.images) ? entry.images : entry.image ? [entry.image] : [];
 
-// Several photos: crossfade automatically, tap/click shows the next one
+const isVideo = (src) => /\.(mp4|webm|mov)$/i.test(src);
+
+// Several photos/videos: crossfade automatically, tap/click shows the next one.
+// A video plays muted to its end, then the gallery moves on.
 function buildGallery(sources, alt, lazy) {
   const gallery = document.createElement("button");
   gallery.type = "button";
   gallery.className = "news-gallery";
   gallery.setAttribute("aria-label", "Nächstes Foto anzeigen");
 
-  const imgs = sources.map((src, n) => {
-    const img = document.createElement("img");
-    img.src = src;
-    img.alt = `${alt} (Foto ${n + 1} von ${sources.length})`;
-    if (lazy) img.loading = "lazy";
-    if (n === 0) img.classList.add("active");
-    gallery.append(img);
-    return img;
+  // Each slide: the photo/video itself plus a blurred copy behind it that
+  // fills the frame when the shapes don't match (see "mixed" below)
+  const slides = sources.map((src, n) => {
+    const slide = document.createElement("span");
+    slide.className = "gallery-slide";
+    if (n === 0) slide.classList.add("active");
+
+    let media, bg;
+    if (isVideo(src)) {
+      const video = () => {
+        const v = document.createElement("video");
+        v.muted = true;
+        v.playsInline = true;
+        v.src = src;
+        return v;
+      };
+      media = video();
+      media.preload = "metadata"; // needed for its shape, see below
+      media.setAttribute("aria-label", `${alt} (Video)`);
+      media.addEventListener("ended", () => {
+        if (slide.classList.contains("active")) {
+          show(current + 1);
+          start();
+        }
+      });
+      bg = video();
+      bg.preload = "none";
+    } else {
+      media = document.createElement("img");
+      media.src = src;
+      media.alt = `${alt} (Foto ${n + 1} von ${sources.length})`;
+      if (lazy) media.loading = "lazy";
+      bg = document.createElement("span");
+      bg.style.backgroundImage = `url("${src}")`;
+    }
+    bg.className = "gallery-bg";
+    bg.setAttribute("aria-hidden", "true");
+    media.className = "gallery-media";
+
+    slide.append(bg, media);
+    gallery.append(slide);
+    return { slide, media, bg };
   });
+  const imgs = slides.map((s) => s.media);
 
   const dots = document.createElement("span");
   dots.className = "gallery-dots";
@@ -39,17 +77,30 @@ function buildGallery(sources, alt, lazy) {
   });
   gallery.append(dots);
 
-  // Box takes the average shape of all photos so none is cropped much
+  // Similar shapes: box takes their average shape, photos fill it.
+  // Very different shapes (portrait + landscape): 4:3 box, each shown
+  // whole and centred on a blurred copy of itself.
   Promise.all(
     imgs.map((img) =>
-      img.decode().then(
-        () => img.naturalWidth / img.naturalHeight,
-        () => null,
-      ),
+      img.tagName === "VIDEO"
+        ? new Promise((resolve) => {
+            const ratio = () => img.videoWidth / img.videoHeight || null;
+            if (img.readyState >= 1) resolve(ratio());
+            img.addEventListener("loadedmetadata", () => resolve(ratio()));
+            img.addEventListener("error", () => resolve(null));
+          })
+        : img.decode().then(
+            () => img.naturalWidth / img.naturalHeight,
+            () => null,
+          ),
     ),
   ).then((ratios) => {
     const ok = ratios.filter(Boolean);
-    if (ok.length) {
+    if (ok.length && Math.max(...ok) / Math.min(...ok) > 1.2) {
+      gallery.classList.add("mixed");
+      gallery.style.aspectRatio = "4 / 3";
+      start(); // a video already playing gets its backdrop going too
+    } else if (ok.length) {
       gallery.style.aspectRatio = String(
         ok.reduce((a, b) => a + b, 0) / ok.length,
       );
@@ -61,23 +112,44 @@ function buildGallery(sources, alt, lazy) {
   let onScreen = false;
   let hovering = false;
 
+  // Video slides: the blurred backdrop copy runs along with the video
+  const videoDo = (s, fn) => {
+    if (s.media.tagName !== "VIDEO") return;
+    fn(s.media);
+    if (gallery.classList.contains("mixed")) fn(s.bg);
+  };
+
   const show = (next) => {
-    imgs[current].classList.remove("active");
+    slides[current].slide.classList.remove("active");
     dotEls[current].classList.remove("active");
-    current = (next + imgs.length) % imgs.length;
-    imgs[current].classList.add("active");
+    videoDo(slides[current], (v) => v.pause());
+    current = (next + slides.length) % slides.length;
+    slides[current].slide.classList.add("active");
     dotEls[current].classList.add("active");
+    videoDo(slides[current], (v) => (v.currentTime = 0));
   };
 
   const stop = () => {
-    clearInterval(timer);
+    clearTimeout(timer);
     timer = null;
   };
   const start = () => {
     stop();
-    if (!onScreen || hovering || document.hidden || reduceMotion.matches)
+    const active = slides[current];
+    if (!onScreen || document.hidden) {
+      videoDo(active, (v) => v.pause());
       return;
-    timer = setInterval(() => show(current + 1), GALLERY_INTERVAL);
+    }
+    // Videos play even on hover; only the photo countdown pauses
+    if (active.media.tagName === "VIDEO") {
+      if (!reduceMotion.matches) videoDo(active, (v) => v.play().catch(() => {}));
+      return;
+    }
+    if (hovering || reduceMotion.matches) return;
+    timer = setTimeout(() => {
+      show(current + 1);
+      start();
+    }, GALLERY_INTERVAL);
   };
 
   gallery.addEventListener("click", () => {

@@ -485,30 +485,55 @@ a:hover {
 /* Mehrere Fotos: übereinander gestapelt, das aktive wird eingeblendet */
 .news-gallery {
   position: relative;
-  display: grid;
+  display: block;
   width: 100%;
   aspect-ratio: 1;
   padding: 0;
   border: 0;
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--sky-50);
+  background: var(--navy);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 
-.news-gallery img {
-  grid-area: 1 / 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
+/* Jedes Foto/Video liegt genau im Rahmen, egal welches Format */
+.gallery-slide {
+  position: absolute;
+  inset: 0;
   opacity: 0;
   transition: opacity 0.8s ease;
 }
 
-.news-gallery img.active {
+.gallery-slide.active {
   opacity: 1;
+}
+
+.news-gallery .gallery-media,
+.gallery-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.gallery-bg {
+  display: none;
+}
+
+/* Hoch- und Querformat gemischt: ganz zeigen, die freie Fläche füllt
+   eine unscharfe, vergrößerte Kopie desselben Bildes */
+.news-gallery.mixed .gallery-media {
+  object-fit: contain;
+}
+
+.news-gallery.mixed .gallery-bg {
+  display: block;
+  background: center / cover no-repeat;
+  filter: blur(24px) brightness(0.75) saturate(1.1);
+  transform: scale(1.2);
 }
 
 .gallery-dots {
